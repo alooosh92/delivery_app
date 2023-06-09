@@ -30,16 +30,16 @@ AppBar appBarDefult() {
         );
       },
     ),
-    actions: [
+    actions: const [
       Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5),
+              padding: EdgeInsets.only(left: 5, right: 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'نقاطي',
                     style: TextStyle(
@@ -57,7 +57,7 @@ AppBar appBarDefult() {
                 ],
               ),
             ),
-            const InkWell(
+            InkWell(
               child: Icon(Icons.shopping_cart_outlined),
             ),
           ],

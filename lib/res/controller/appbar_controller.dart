@@ -2,7 +2,6 @@ import 'package:delivery_app/res/master/api.dart';
 import 'package:delivery_app/res/screen/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class AppbarController extends GetxController {
   String? local;
@@ -70,16 +69,10 @@ DropdownMenuItem<String> dropdownMenuItemDef(
     String id, double late, double long, String text) {
   return DropdownMenuItem<String>(
     value: id,
-    child: InkWell(
-      onTap: () {
-        var k = GetStorage();
-        k.write('location', id);
-      },
-      child: Row(
-        children: [
-          Text(text),
-        ],
-      ),
+    child: Row(
+      children: [
+        Text(text),
+      ],
     ),
   );
 }
