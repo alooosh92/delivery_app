@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
               initialData: const [],
               builder: (context, snapshot) {
                 Map<String, List<Widget>> type = {};
+                // ignore: unused_local_variable
                 List<ImageCard> l = [];
                 for (var element in snapshot.data!) {
                   type.addIf(!type.containsKey(element.shoptype),

@@ -10,6 +10,7 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MapController controller = Get.put(MapController());
+    // ignore: unused_local_variable
     GoogleMapController controllerGM;
     Set<Polyline> polyLineList = {};
     return Scaffold(
