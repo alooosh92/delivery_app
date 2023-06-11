@@ -1,5 +1,7 @@
 import 'package:delivery_app/res/master/color.dart';
+import 'package:delivery_app/res/screen/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccontScreen extends StatelessWidget {
   const AccontScreen({super.key});
@@ -19,7 +21,9 @@ class AccontScreen extends StatelessWidget {
                 children: [
                   ElevateButtonAccont(
                     text: 'تعديل ملفك الشخصي',
-                    press: () {},
+                    press: () {
+                      Get.to(const UserInfoScreen());
+                    },
                   ),
                   ElevateButtonAccont(
                     text: 'طلباتي',
