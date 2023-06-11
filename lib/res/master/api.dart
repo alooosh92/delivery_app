@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class Api {
   static Map<String, String> header = {
     "Authorization":
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImp0aSI6Ijg2YTY1ZGJiLTYxNmYtNGIxOC04MmQ2LTE2OGFjMjViNmE5NyIsInVpZCI6ImJmYzc1N2RjLThiMmItNDgzMi1iZTFjLWY2NTZiMmY1NmMzZiIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE2ODY0Njk3MjIsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.kqQiyKa_GU7UX4NjQCeeHzYHzlVGMHFtM7wkbFacPkU",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImp0aSI6ImE0OTliMjQwLWQxMTQtNGZlOC04MTVlLTBiOTBjMDg3YmVjYyIsInVpZCI6ImJmYzc1N2RjLThiMmItNDgzMi1iZTFjLWY2NTZiMmY1NmMzZiIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE2ODY3MzczMDEsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.5aev8XLc-5mkkl_UArGpN9AyZW-T82ApuIaFupPOQw0",
     "Accept": "*/*",
     "Content-Type": "application/json"
   };
@@ -16,6 +16,8 @@ class Api {
   static Uri getQoteTody = Uri.parse("${master}app/GetTodayQotes");
   static Uri getShopRegion = Uri.parse("${master}app/GetShopsByRegion");
   static Uri addUserLocation = Uri.parse("${master}app/AddUserLocation");
+  static Uri getItemByEvaluation =
+      Uri.parse("${master}app/GetItemByEvaluation");
 }
 
 class UserLocation {
@@ -155,6 +157,49 @@ class Shop {
       s.urlImage = "${Api.image}${s.urlImage}";
       s.urlLogo = "${Api.image}${s.urlLogo}";
       list.add(s);
+    }
+    return list;
+  }
+}
+
+class ItemByEvaluation {
+  late String id;
+  late String name;
+  late String shop;
+  late double evaluation;
+  late double price;
+  late String image;
+
+  ItemByEvaluation({
+    required this.id,
+    required this.name,
+    required this.shop,
+    required this.evaluation,
+    required this.price,
+    required this.image,
+  });
+
+  factory ItemByEvaluation.fromJson(Map<String, dynamic> json) {
+    return ItemByEvaluation(
+      id: json["id"],
+      name: json["name"],
+      shop: json["shop"],
+      evaluation: json["evaluation"],
+      price: double.parse(json["price"].toString()),
+      image: "${Api.image}${json["image"]}",
+    );
+  }
+  static Future<List<ItemByEvaluation>> getItemByEvaluation() async {
+    http.Response response =
+        await http.get(Api.getItemByEvaluation, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return List.empty();
+    }
+    var body = jsonDecode(response.body);
+    List<ItemByEvaluation> list = [];
+    for (var element in body) {
+      var i = ItemByEvaluation.fromJson(element);
+      list.add(i);
     }
     return list;
   }

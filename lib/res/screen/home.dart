@@ -98,8 +98,8 @@ class ImageCard extends StatelessWidget {
         onTap: press,
         child: Image.network(
           path,
-          height: 200,
-          width: 150,
+          height: MediaQuery.of(context).size.height * 0.4,
+          width: MediaQuery.of(context).size.width * 0.6,
           fit: BoxFit.cover,
         ),
       ),
