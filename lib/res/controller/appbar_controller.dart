@@ -7,6 +7,8 @@ class AppbarController extends GetxController {
   String? local;
   double late = 0;
   double long = 0;
+  RxDouble rxLate = RxDouble(0);
+  RxDouble rxLong = RxDouble(0);
   List<DropdownMenuItem<String>> list = [];
   List<UserLocation> userLocation = [];
   void changeLocal(String? localDelever) {
@@ -14,6 +16,8 @@ class AppbarController extends GetxController {
     var lo = userLocation.firstWhere((element) => element.id == localDelever);
     late = lo.locationLate;
     long = lo.locationLong;
+    rxLate.value = lo.locationLate;
+    rxLong.value = lo.locationLong;
     update();
   }
 
