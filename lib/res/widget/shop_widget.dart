@@ -26,13 +26,13 @@ class ShopWidget extends StatelessWidget {
             text: text,
             onchanged: (val) {},
           ),
-          GetX<ShopController>(
+          GetBuilder<ShopController>(
             builder: (controller) {
               List<Widget> list = [];
               for (var element in shopList) {
                 double p = Geolocator.distanceBetween(
-                  appController.rxLate.value,
-                  appController.rxLong.value,
+                  appController.late,
+                  appController.long,
                   element.lateLocation,
                   element.longLocation,
                 );

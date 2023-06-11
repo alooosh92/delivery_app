@@ -5,15 +5,16 @@ import 'package:get/get.dart';
 
 class AppbarController extends GetxController {
   String? local;
-  RxDouble rxLate = RxDouble(0);
-  RxDouble rxLong = RxDouble(0);
+  double late = 0;
+  double long = 0;
   List<DropdownMenuItem<String>> list = [];
   List<UserLocation> userLocation = [];
   void changeLocal(String? localDelever) {
     local = localDelever;
     var lo = userLocation.firstWhere((element) => element.id == localDelever);
-    rxLate.value = lo.locationLate;
-    rxLong.value = lo.locationLong;
+    late = lo.locationLate;
+    long = lo.locationLong;
+    update();
   }
 
   void getLocation() async {
