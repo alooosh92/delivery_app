@@ -17,9 +17,9 @@ class SearchScreen extends StatelessWidget {
         SizedBox(
             height: MediaQuery.of(context).size.height * 0.71,
             width: MediaQuery.of(context).size.width * 0.9,
-            child: FutureBuilder<List<ItemByEvaluation>>(
+            child: FutureBuilder<List<Item>>(
               initialData: const [],
-              future: ItemByEvaluation.getItemByEvaluation(),
+              future: Item.getItemByEvaluation(),
               builder: (context, snapshot) {
                 return GridView.builder(
                   itemCount: snapshot.data!.length,
@@ -103,14 +103,9 @@ class CardSearch extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(itemName),
-                        Row(
-                          children: [
-                            Start(order: 1, elv: elev.round()),
-                            Start(order: 2, elv: elev.round()),
-                            Start(order: 3, elv: elev.round()),
-                            Start(order: 4, elv: elev.round()),
-                            Start(order: 5, elv: elev.round()),
-                          ],
+                        ElevWidget(
+                          elev: elev,
+                          size: 10,
                         )
                       ],
                     ),
@@ -151,22 +146,42 @@ class CardSearch extends StatelessWidget {
   }
 }
 
+class ElevWidget extends StatelessWidget {
+  const ElevWidget({super.key, required this.elev, required this.size});
+
+  final double elev;
+  final double size;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Start(order: 1, elv: elev.round(), size: size),
+        Start(order: 2, elv: elev.round(), size: size),
+        Start(order: 3, elv: elev.round(), size: size),
+        Start(order: 4, elv: elev.round(), size: size),
+        Start(order: 5, elv: elev.round(), size: size),
+      ],
+    );
+  }
+}
+
 class Start extends StatelessWidget {
   const Start({
     super.key,
     required this.order,
     required this.elv,
+    required this.size,
   });
   final int order;
   final int elv;
-
+  final double size;
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: order <= elv,
-      child: const Icon(
+      child: Icon(
         Icons.star_rate_rounded,
-        size: 10,
+        size: size,
         color: Colors.amber,
       ),
     );

@@ -5,22 +5,26 @@ import 'package:http/http.dart' as http;
 class Api {
   static Map<String, String> header = {
     "Authorization":
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImp0aSI6ImE0OTliMjQwLWQxMTQtNGZlOC04MTVlLTBiOTBjMDg3YmVjYyIsInVpZCI6ImJmYzc1N2RjLThiMmItNDgzMi1iZTFjLWY2NTZiMmY1NmMzZiIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE2ODY3MzczMDEsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.5aev8XLc-5mkkl_UArGpN9AyZW-T82ApuIaFupPOQw0",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImp0aSI6Ijk2YjMwYmMxLTkwYmQtNDQ2NC05YzBkLTkwYThjY2JmODI0OCIsInVpZCI6IjhhYjhjOThkLTAzOTgtNDUxMi05NWFmLTFjNjg4ZmRhNjExNSIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE2ODcxNzQwOTcsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.KYyPBTXmPuGmfJwBih8yijwBMvZBiyvT6Atgq_u63ic",
     "Accept": "*/*",
     "Content-Type": "application/json"
   };
-  static String hosting = "http://deliveryorder-001-site1.dtempurl.com/";
+  static String hosting = "http://10.0.2.2:5000/";
+  //"http://deliveryorder-001-site1.dtempurl.com/";
   static String master = "${hosting}api/";
   static String image = "${hosting}img/";
   static Uri getUserLocation = Uri.parse("${master}app/GetUserLocation");
   static Uri getQoteTody = Uri.parse("${master}app/GetTodayQotes");
   static Uri getShopRegion = Uri.parse("${master}app/GetShopsByRegion");
   static Uri addUserLocation = Uri.parse("${master}app/AddUserLocation");
-  static Uri getUserInfo = Uri.parse("${master}App/GetUserInfo");
-  static Uri updateUserInfo = Uri.parse("${master}App/UpdateUserInfo");
+  static Uri getUserInfo = Uri.parse("${master}app/GetUserInfo");
+  static Uri updateUserInfo = Uri.parse("${master}app/UpdateUserInfo");
   static Uri getItemByEvaluation =
       Uri.parse("${master}app/GetItemByEvaluation");
   static Uri getRegion = Uri.parse("${master}app/GetRegions");
+  static Uri getUserOrder = Uri.parse("${master}app/GetUserOrder");
+  static Uri getItemShop = Uri.parse("${master}app/GetItemByShop");
+  static Uri getShop = Uri.parse("${master}app/GetShop");
 }
 
 class UserLocation {
@@ -39,8 +43,8 @@ class UserLocation {
     return UserLocation(
       id: json["id"],
       description: json["description"],
-      locationLate: json["locationLate"],
-      locationLong: json["locationLong"],
+      locationLate: double.parse(json["locationLate"].toString()),
+      locationLong: double.parse(json["locationLong"].toString()),
     );
   }
   static Future<List<UserLocation>> getUserLocation() async {
@@ -77,15 +81,20 @@ class QoteToday {
   late String id;
   late String imageUrl;
   late String shoptype;
+  late String shopId;
 
-  QoteToday({required this.id, required this.imageUrl, required this.shoptype});
+  QoteToday(
+      {required this.id,
+      required this.imageUrl,
+      required this.shoptype,
+      required this.shopId});
 
   factory QoteToday.fromJson(Map<String, dynamic> json) {
     return QoteToday(
-      id: json['id'],
-      imageUrl: "${Api.image}${json['imageUrl']}",
-      shoptype: json['shoptype'],
-    );
+        id: json['id'],
+        imageUrl: "${Api.image}${json['imageUrl']}",
+        shoptype: json['shoptype'],
+        shopId: json['shopId']);
   }
 
   static Future<List<QoteToday>> getQoteToday() async {
@@ -141,8 +150,8 @@ class Shop {
       type: json["type"],
       isFood: json["isFood"],
       shopDescription: des,
-      lateLocation: json["lateLocation"],
-      longLocation: json["longLocation"],
+      lateLocation: double.parse(json["lateLocation"].toString()),
+      longLocation: double.parse(json["longLocation"].toString()),
       evaluation: double.parse(json["evaluation"].toString()),
       residentsNumber: double.parse(json["residentsNumber"].toString()),
     );
@@ -163,9 +172,23 @@ class Shop {
     }
     return list;
   }
+
+  static Future<Shop?> getShop(String id) async {
+    var json = jsonEncode(id);
+    http.Response response =
+        await http.post(Api.getItemShop, headers: Api.header, body: json);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return null;
+    }
+    var body = jsonDecode(response.body);
+    Shop s = Shop.fromJson(body);
+    s.urlImage = "${Api.image}${s.urlImage}";
+    s.urlLogo = "${Api.image}${s.urlLogo}";
+    return s;
+  }
 }
 
-class ItemByEvaluation {
+class Item {
   late String id;
   late String name;
   late String shop;
@@ -173,7 +196,7 @@ class ItemByEvaluation {
   late double price;
   late String image;
 
-  ItemByEvaluation({
+  Item({
     required this.id,
     required this.name,
     required this.shop,
@@ -182,26 +205,42 @@ class ItemByEvaluation {
     required this.image,
   });
 
-  factory ItemByEvaluation.fromJson(Map<String, dynamic> json) {
-    return ItemByEvaluation(
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
       id: json["id"],
       name: json["name"],
       shop: json["shop"],
-      evaluation: json["evaluation"],
+      evaluation: double.parse(json["evaluation"].toString()),
       price: double.parse(json["price"].toString()),
       image: "${Api.image}${json["image"]}",
     );
   }
-  static Future<List<ItemByEvaluation>> getItemByEvaluation() async {
+  static Future<List<Item>> getItemByEvaluation() async {
     http.Response response =
         await http.get(Api.getItemByEvaluation, headers: Api.header);
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }
     var body = jsonDecode(response.body);
-    List<ItemByEvaluation> list = [];
+    List<Item> list = [];
     for (var element in body) {
-      var i = ItemByEvaluation.fromJson(element);
+      var i = Item.fromJson(element);
+      list.add(i);
+    }
+    return list;
+  }
+
+  static Future<List<Item>> getItemByShop(String id) async {
+    var json = jsonEncode(id);
+    http.Response response =
+        await http.post(Api.getItemShop, headers: Api.header, body: json);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return List.empty();
+    }
+    var body = jsonDecode(response.body);
+    List<Item> list = [];
+    for (var element in body) {
+      var i = Item.fromJson(element);
       list.add(i);
     }
     return list;
@@ -286,5 +325,107 @@ class Region {
       lRegion.add(re);
     }
     return lRegion;
+  }
+}
+
+class TabelRowItem {
+  late String item;
+  late int number;
+  late int price;
+
+  TabelRowItem({
+    required this.item,
+    required this.number,
+    required this.price,
+  });
+  factory TabelRowItem.fromJson(Map<String, dynamic> json) {
+    return TabelRowItem(
+        item: json["itemName"], number: json["number"], price: json["price"]);
+  }
+}
+
+class UserOrder {
+  late String id;
+  late String shopname;
+  late List<TabelRowItem> listOrder;
+  late int delivery;
+  late DateTime createTime;
+  late DateTime? confirmOrder;
+  late DateTime? accseptOrder;
+  late DateTime? deliveryTime;
+  late int code;
+
+  UserOrder(
+      {required this.id,
+      required this.shopname,
+      required this.listOrder,
+      required this.delivery,
+      required this.createTime,
+      required this.confirmOrder,
+      required this.accseptOrder,
+      required this.deliveryTime,
+      required this.code});
+  factory UserOrder.fromJson(Map<String, dynamic> json) {
+    List<TabelRowItem> list = [];
+    for (var element in json["listOrder"]) {
+      list.add(TabelRowItem.fromJson(element));
+    }
+    return UserOrder(
+        id: json["id"],
+        shopname: json["shopName"],
+        listOrder: list,
+        delivery: json["delivery"],
+        createTime: DateTime.parse(json["createDate"].toString()),
+        confirmOrder: DateTime.tryParse(json["confirmOrder"].toString()),
+        accseptOrder: DateTime.tryParse(json["accseptOrder"].toString()),
+        deliveryTime: DateTime.tryParse(json["deliveryTime"].toString()),
+        code: json["code"]);
+  }
+
+  static Future<List<UserOrder>> getUserOrder() async {
+    http.Response response =
+        await http.get(Api.getUserOrder, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return List.empty();
+    }
+    var body = jsonDecode(response.body);
+    List<UserOrder> list = [];
+    for (var element in body) {
+      var e = UserOrder.fromJson(element);
+      list.add(e);
+    }
+    return list;
+  }
+}
+
+class ShopItem {
+  late Shop? shop;
+  late List<Item>? items;
+  ShopItem({
+    required this.shop,
+    required this.items,
+  });
+  factory ShopItem.fromJson(Map<String, dynamic> json) {
+    List<Item> items = [];
+    for (var element in json["listItem"]) {
+      items.add(Item.fromJson(element));
+    }
+    return ShopItem(
+      shop: Shop.fromJson(json["shop"]),
+      items: items,
+    );
+  }
+  static Future<ShopItem?> getShop(String id) async {
+    var json = jsonEncode(id);
+    http.Response response =
+        await http.post(Api.getShop, headers: Api.header, body: json);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return null;
+    }
+    var body = jsonDecode(response.body);
+    ShopItem s = ShopItem.fromJson(body);
+    s.shop!.urlImage = "${Api.image}${s.shop!.urlImage}";
+    s.shop!.urlLogo = "${Api.image}${s.shop!.urlLogo}";
+    return s;
   }
 }

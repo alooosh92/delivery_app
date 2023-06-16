@@ -1,5 +1,6 @@
 import 'package:delivery_app/res/master/api.dart';
 import 'package:delivery_app/res/screen/map.dart';
+import 'package:delivery_app/res/screen/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../master/color.dart';
@@ -48,9 +49,10 @@ class HomeScreen extends StatelessWidget {
                       element.shoptype, l = []);
                   type[element.shoptype]!.add(
                     ImageCard(
-                      path: element.imageUrl,
-                      press: () {},
-                    ),
+                        path: element.imageUrl,
+                        press: () {
+                          Get.to(ShopScreen(shop: element.shopId));
+                        }),
                   );
                 }
                 List<Widget> out = [];

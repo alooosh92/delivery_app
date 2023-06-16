@@ -1,5 +1,6 @@
 import 'package:delivery_app/res/master/color.dart';
 import 'package:delivery_app/res/screen/user_info.dart';
+import 'package:delivery_app/res/screen/user_order.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +28,9 @@ class AccontScreen extends StatelessWidget {
                   ),
                   ElevateButtonAccont(
                     text: 'طلباتي',
-                    press: () {},
+                    press: () {
+                      Get.to(const UserOrderScreen());
+                    },
                   ),
                   ElevateButtonAccont(
                     text: 'عناويني',

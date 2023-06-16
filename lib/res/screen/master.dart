@@ -1,9 +1,9 @@
 import 'package:delivery_app/res/controller/pageview_controller.dart';
-import 'package:delivery_app/res/screen/Shop.dart';
 import 'package:delivery_app/res/screen/accont.dart';
 import 'package:delivery_app/res/screen/home.dart';
 import 'package:delivery_app/res/screen/restorant.dart';
 import 'package:delivery_app/res/screen/search.dart';
+import 'package:delivery_app/res/screen/shops.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../master/app_bar.dart';
@@ -36,6 +36,6 @@ List screen = [
   const HomeScreen(),
   const SearchScreen(),
   const RestorantScreen(),
-  const ShopScreen(),
+  const ShopsScreen(),
   const AccontScreen(),
 ];
