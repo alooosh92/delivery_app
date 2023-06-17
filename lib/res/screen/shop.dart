@@ -2,6 +2,7 @@ import 'package:delivery_app/res/master/api.dart';
 import 'package:delivery_app/res/master/app_bar.dart';
 import 'package:delivery_app/res/screen/search.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../master/color.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -55,8 +56,8 @@ class ShopScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const ElevWidget(
-                    elev: 3,
+                  ElevWidget(
+                    elev: snapshot.data!.shop!.evaluation,
                     size: 25,
                   )
                 ],
@@ -114,6 +115,26 @@ class ShopScreen extends StatelessWidget {
                 }
               }
             }
+            list.add(Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: ColorManager.appbarcolor, width: 2),
+              ),
+              height: MediaQuery.of(context).size.height / 3,
+              width: MediaQuery.of(context).size.width,
+              child: GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: CameraPosition(
+                    target: LatLng(snapshot.data!.shop!.lateLocation,
+                        snapshot.data!.shop!.longLocation),
+                    zoom: 16),
+                markers: <Marker>{
+                  Marker(
+                      markerId: const MarkerId("0"),
+                      position: LatLng(snapshot.data!.shop!.lateLocation,
+                          snapshot.data!.shop!.longLocation))
+                },
+              ),
+            ));
             return SizedBox(
               height: MediaQuery.of(context).size.height * 0.9,
               child: SingleChildScrollView(
