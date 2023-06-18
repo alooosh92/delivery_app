@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-
-import '../master/api.dart';
+import '../database/user_info.dart';
 
 class UserInfoController extends GetxController {
   void updateInfo(Userinfo info) async {

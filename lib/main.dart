@@ -1,5 +1,5 @@
-import 'package:delivery_app/res/master/services.dart';
-import 'package:delivery_app/res/screen/master.dart';
+import 'package:delivery_app/res/master_widget/services.dart';
+import 'package:delivery_app/res/screen/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';

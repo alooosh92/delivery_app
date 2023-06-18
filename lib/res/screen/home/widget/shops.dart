@@ -1,7 +1,7 @@
-import 'package:delivery_app/res/widget/shop_widget.dart';
+import 'package:delivery_app/res/screen/home/widget/shop_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/shop_controller.dart';
+import '../../../controller/shop_controller.dart';
 
 class ShopsScreen extends StatelessWidget {
   const ShopsScreen({super.key});

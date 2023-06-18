@@ -1,5 +1,6 @@
-import 'package:delivery_app/res/master/api.dart';
 import 'package:get/get.dart';
+
+import '../database/shop.dart';
 
 class ShopController extends GetxController {
   double width = 100.0;

@@ -1,8 +1,10 @@
 import 'package:delivery_app/res/controller/navigationbar_controller.dart';
-import 'package:delivery_app/res/master/color.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+
+import 'color.dart';
 
 class BottomNavigationBarDefulte extends StatelessWidget {
   const BottomNavigationBarDefulte({super.key});

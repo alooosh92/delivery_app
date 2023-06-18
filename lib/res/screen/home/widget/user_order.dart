@@ -1,8 +1,8 @@
-import 'package:delivery_app/res/master/api.dart';
-import 'package:delivery_app/res/master/app_bar.dart';
-import 'package:delivery_app/res/master/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../database/user_order.dart';
+import '../../../master_widget/color.dart';
 
 class UserOrderScreen extends StatelessWidget {
   const UserOrderScreen({super.key});

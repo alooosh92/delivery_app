@@ -1,4 +1,4 @@
-import 'package:delivery_app/res/master/translation.dart';
+import 'package:delivery_app/res/master_widget/translation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

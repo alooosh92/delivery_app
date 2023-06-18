@@ -1,12 +1,12 @@
 import 'package:delivery_app/res/controller/appbar_controller.dart';
 import 'package:delivery_app/res/controller/shop_controller.dart';
-import 'package:delivery_app/res/master/api.dart';
-import 'package:delivery_app/res/master/color.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import '../screen/Shop.dart';
-import '../widget/text_form_field_search.dart';
+import '../../../database/shop.dart';
+import '../../../master_widget/color.dart';
+import '../../Shop.dart';
+import 'text_form_field_search.dart';
 
 class ShopWidget extends StatelessWidget {
   const ShopWidget({

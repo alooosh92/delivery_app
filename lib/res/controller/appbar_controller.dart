@@ -1,7 +1,7 @@
-import 'package:delivery_app/res/master/api.dart';
-import 'package:delivery_app/res/screen/map.dart';
+import 'package:delivery_app/res/screen/map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../database/user_location.dart';
 
 class AppbarController extends GetxController {
   String? local;
