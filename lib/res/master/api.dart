@@ -27,6 +27,9 @@ class Api {
   static Uri getShop = Uri.parse("${master}app/GetShop");
   static Uri getItemInfo = Uri.parse("${master}app/GetItemInof");
   static Uri deleteUserllocation = Uri.parse("${master}app/DeleteUserLocation");
+  static Uri bayItem = Uri.parse("${master}App/AddItemToOrder");
+  static Uri orderDone = Uri.parse("${master}App/OrderDone");
+  static Uri deleteOrder = Uri.parse("${master}App/DeleteOrder");
 }
 
 class UserLocation {
@@ -408,6 +411,26 @@ class UserOrder {
     }
     return list;
   }
+
+  static Future<bool> doneOrder(String id) async {
+    var body = jsonEncode(id);
+    http.Response response =
+        await http.put(Api.orderDone, body: body, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  static Future<bool> deleteOrder(String id) async {
+    var body = jsonEncode(id);
+    http.Response response =
+        await http.delete(Api.deleteOrder, body: body, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 }
 
 class ShopItem {
@@ -484,5 +507,45 @@ class ItemInfo {
     }
     var item = ItemInfo.fromJson(jsonDecode(response.body));
     return item;
+  }
+}
+
+class BayItem {
+  late String item;
+  late int numberOfItem;
+  late String? notes;
+  late String locationId;
+  late double price;
+  BayItem({
+    required this.item,
+    required this.numberOfItem,
+    required this.notes,
+    required this.locationId,
+    required this.price,
+  });
+  factory BayItem.fromJson(Map<String, dynamic> json) {
+    return BayItem(
+        item: json["item"],
+        numberOfItem: json["numberOfItem"],
+        notes: json["notes"],
+        locationId: json["locationId"],
+        price: json["price"]);
+  }
+  Map<String, dynamic> tojson() => {
+        "item": item,
+        "numberOfItem": numberOfItem,
+        "notes": notes,
+        "locationId": locationId,
+        "price": price,
+      };
+  static Future<bool> bayItem(BayItem item) async {
+    var json = item.tojson();
+    var body = jsonEncode(json);
+    http.Response response =
+        await http.post(Api.bayItem, body: body, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
+    return true;
   }
 }

@@ -28,12 +28,6 @@ class AccontScreen extends StatelessWidget {
                     },
                   ),
                   ElevateButtonAccont(
-                    text: 'طلباتي',
-                    press: () {
-                      Get.to(const UserOrderScreen());
-                    },
-                  ),
-                  ElevateButtonAccont(
                     text: 'عناويني',
                     press: () {
                       Get.to(const UserLocationScreen());

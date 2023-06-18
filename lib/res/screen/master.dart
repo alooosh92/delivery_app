@@ -4,6 +4,7 @@ import 'package:delivery_app/res/screen/home.dart';
 import 'package:delivery_app/res/screen/restorant.dart';
 import 'package:delivery_app/res/screen/search.dart';
 import 'package:delivery_app/res/screen/shops.dart';
+import 'package:delivery_app/res/screen/user_order.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../master/app_bar.dart';
@@ -22,7 +23,7 @@ class MasterScreen extends StatelessWidget {
         onPageChanged: (value) {
           pageviewController.onScroll(value);
         },
-        itemCount: 5,
+        itemCount: 6,
         itemBuilder: (context, index) {
           return screen[index];
         },
@@ -37,5 +38,6 @@ List screen = [
   const SearchScreen(),
   const RestorantScreen(),
   const ShopsScreen(),
+  const UserOrderScreen(),
   const AccontScreen(),
 ];
