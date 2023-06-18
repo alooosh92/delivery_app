@@ -26,6 +26,7 @@ class Api {
   static Uri getItemShop = Uri.parse("${master}app/GetItemByShop");
   static Uri getShop = Uri.parse("${master}app/GetShop");
   static Uri getItemInfo = Uri.parse("${master}app/GetItemInof");
+  static Uri deleteUserllocation = Uri.parse("${master}app/DeleteUserLocation");
 }
 
 class UserLocation {
@@ -75,6 +76,16 @@ class UserLocation {
       return true;
     }
     return false;
+  }
+
+  static Future<bool> deleteUserLocation(String id) async {
+    var body = jsonEncode(id);
+    http.Response response = await http.delete(Api.deleteUserllocation,
+        body: body, headers: Api.header);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
+    return true;
   }
 }
 
