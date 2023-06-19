@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../../../database/shop_item.dart';
+import '../../../master_widget/card_search.dart';
 import '../../../master_widget/color.dart';
-import '../../home/widget/search.dart';
+import '../../../master_widget/elev_widget.dart';
 
 class ShopBody extends StatelessWidget {
   const ShopBody({super.key, required this.shop});
