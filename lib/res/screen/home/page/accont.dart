@@ -1,6 +1,5 @@
+import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:delivery_app/res/screen/home/widget/elevate_button_accont.dart';
-import 'package:delivery_app/res/screen/userinfo/user_info.dart';
-import 'package:delivery_app/res/screen/userlocation/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +8,7 @@ class AccontScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
     return SingleChildScrollView(
       child: Center(
         child: Padding(
@@ -21,25 +21,16 @@ class AccontScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevateButtonAccont(
-                    text: 'تعديل ملفك الشخصي',
-                    press: () {
-                      Get.to(const UserInfoScreen());
-                    },
-                  ),
+                      text: 'تعديل ملفك الشخصي',
+                      press: homeController.clickBtnUserInfoScreen),
                   ElevateButtonAccont(
-                    text: 'عناويني',
-                    press: () {
-                      Get.to(const UserLocationScreen());
-                    },
-                  ),
+                      text: 'عناويني',
+                      press: homeController.clickBtnUserLocationScreen),
                   ElevateButtonAccont(
-                    text: 'الإعدادات',
-                    press: () {},
-                  ),
+                      text: 'الإعدادات', press: homeController.clickBtnSetting),
                   ElevateButtonAccont(
-                    text: 'تواصل معنا',
-                    press: () {},
-                  ),
+                      text: 'تواصل معنا',
+                      press: homeController.clickBtnConuctUs),
                 ],
               ),
             ),

@@ -1,5 +1,4 @@
-import 'package:delivery_app/res/controller/shop_controller.dart';
-import 'package:delivery_app/res/screen/home/widget/shop_card.dart';
+import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../database/shop.dart';
@@ -15,6 +14,7 @@ class ShopWidget extends StatelessWidget {
   final List<Shop> shopList;
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -22,17 +22,10 @@ class ShopWidget extends StatelessWidget {
             text: text,
             onchanged: (val) {},
           ),
-          GetBuilder<ShopController>(
+          GetBuilder<HomeController>(
             builder: (controller) {
-              List<Widget> list = [];
-              for (var element in shopList) {
-                var sh = ShopCard(
-                  shop: element,
-                );
-                list.add(sh);
-              }
               return Column(
-                children: list,
+                children: homeController.getListShop(shopList),
               );
             },
           )

@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
 
+class TabelRowheadColum extends StatelessWidget {
+  const TabelRowheadColum({super.key, required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20,
+      color: Colors.black38,
+      child: Center(
+        child: Text(
+          text,
+          style:
+              const TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
 TableRow tabelRowHeader() {
-  return TableRow(
+  return const TableRow(
     children: [
-      Container(
-        height: 20,
-        color: Colors.black38,
-        child: const Center(
-          child: Text(
-            "المادة المطلوبة",
-            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
-          ),
-        ),
-      ),
-      Container(
-        height: 20,
-        color: Colors.black38,
-        child: const Center(
-          child: Text(
-            "العدد",
-            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
-          ),
-        ),
-      ),
-      Container(
-        height: 20,
-        color: Colors.black38,
-        child: const Center(
-          child: Text(
-            "السعر",
-            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
-          ),
-        ),
-      ),
+      TabelRowheadColum(text: "المادة المطلوبة"),
+      TabelRowheadColum(text: "العدد"),
+      TabelRowheadColum(text: "السعر"),
     ],
   );
 }

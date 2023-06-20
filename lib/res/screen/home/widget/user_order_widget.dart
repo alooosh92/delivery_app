@@ -1,4 +1,4 @@
-import 'package:delivery_app/res/screen/home/widget/table_row_item.dart';
+import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../database/user_order.dart';
@@ -28,14 +28,7 @@ class UserOrderWidget extends StatelessWidget {
   final int code;
   @override
   Widget build(BuildContext context) {
-    var price = 0;
-    List<TableRow> list = [
-      tabelRowHeader(),
-    ];
-    for (var element in listOrder) {
-      price += element.number * element.price;
-      list.add(tabelRowItem(element.item, element.number, element.price));
-    }
+    HomeController homeController = Get.find();
     return Center(
       child: Container(
         padding: const EdgeInsets.only(bottom: 5),
@@ -122,7 +115,7 @@ class UserOrderWidget extends StatelessWidget {
                             1: FixedColumnWidth(40),
                             2: FixedColumnWidth(50),
                           },
-                          children: list),
+                          children: homeController.getOrderListItem(listOrder)),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -153,7 +146,9 @@ class UserOrderWidget extends StatelessWidget {
                                 color: Colors.black38,
                                 child: Center(
                                   child: Text(
-                                    price.toString(),
+                                    homeController
+                                        .getOrderListPrice(listOrder)
+                                        .toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),
@@ -209,7 +204,10 @@ class UserOrderWidget extends StatelessWidget {
                                 color: ColorManager.appbarcolor,
                                 child: Center(
                                   child: Text(
-                                    (price + delivery).toString(),
+                                    (homeController
+                                                .getOrderListPrice(listOrder) +
+                                            delivery)
+                                        .toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),

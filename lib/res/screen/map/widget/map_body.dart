@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../../../controller/map_controller.dart';
+import 'add_location_button.dart';
 
 class MapBody extends StatelessWidget {
   const MapBody({
@@ -14,7 +14,7 @@ class MapBody extends StatelessWidget {
   final Function() press;
   @override
   Widget build(BuildContext context) {
-    MapController controller = Get.put(MapController());
+    MapController controller = Get.find();
     Set<Polyline> polyLineList = {};
     return FutureBuilder<CameraPosition>(
       future: controller.findPosition(),
@@ -44,47 +44,10 @@ class MapBody extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                        onPressed: controller.markers.isEmpty
-                            ? null
-                            : () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    TextEditingController con =
-                                        TextEditingController();
-                                    return AlertDialog(
-                                      title: const Text(
-                                          "الرجاء ادخال اسم توضيحي للموقع"),
-                                      content: TextFormField(
-                                        controller: con,
-                                        decoration: InputDecoration(
-                                            labelText: "الاسم التوضيحي",
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                gapPadding: 4)),
-                                      ),
-                                      actions: [
-                                        ElevatedButton(
-                                            onPressed: () async {
-                                              var a =
-                                                  await controller.addLocation(
-                                                      con.text,
-                                                      controller.markers.first
-                                                          .position);
-                                              if (a) {
-                                                Get.back();
-                                                Get.back();
-                                              }
-                                            },
-                                            child: const Text("إضافة"))
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                        child: Text(text)),
+                    child: AddLocationButton(
+                      text: text,
+                      press: press,
+                    ),
                   ),
                 ],
               ),

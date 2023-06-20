@@ -8,7 +8,7 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MapBody(text: text, press: () {}),
+      body: MapBody(text: text, press: press),
     );
   }
 }

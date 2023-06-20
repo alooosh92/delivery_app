@@ -1,9 +1,6 @@
-import 'package:delivery_app/res/controller/navigationbar_controller.dart';
-
+import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-
 import 'color.dart';
 
 class BottomNavigationBarDefulte extends StatelessWidget {
@@ -11,12 +8,13 @@ class BottomNavigationBarDefulte extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NavigationbarController>(
+    HomeController homeController = Get.find();
+    return GetBuilder<HomeController>(
       builder: (controller) {
         return BottomNavigationBar(
           selectedItemColor: ColorManager.buttonNavigationSelect,
           unselectedItemColor: ColorManager.buttonNavigationUnSelect,
-          currentIndex: controller.page,
+          currentIndex: homeController.page,
           items: [
             bNBI(Icons.home, 'Home', () {
               controller.pageClick(0);

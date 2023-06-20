@@ -1,16 +1,16 @@
+import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:delivery_app/res/screen/home/widget/shop_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/shop_controller.dart';
 
 class ShopsScreen extends StatelessWidget {
   const ShopsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ShopController controllar = Get.find();
+    HomeController homeController = Get.find();
     return ShopWidget(
-      shopList: controllar.shop,
+      shopList: homeController.shopList,
       text: 'اسم المحل',
     );
   }

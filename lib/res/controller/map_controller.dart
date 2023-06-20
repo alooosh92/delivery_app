@@ -1,9 +1,9 @@
-import 'package:delivery_app/res/controller/appbar_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../database/user_location.dart';
+import 'home_controller.dart';
 
 class MapController extends GetxController {
   Position? position;
@@ -46,8 +46,37 @@ class MapController extends GetxController {
 
   Future<bool> addLocation(String description, LatLng latlng) async {
     var b = await UserLocation.addUserLocation(description, latlng);
-    AppbarController appcon = Get.find();
+    HomeController appcon = Get.find();
     appcon.getLocation();
     return b;
+  }
+
+  void clickMapButton() {
+    MapController controller = Get.find();
+    TextEditingController con = TextEditingController();
+    Get.dialog(
+      AlertDialog(
+        title: const Text("الرجاء ادخال اسم توضيحي للموقع"),
+        content: TextFormField(
+          controller: con,
+          decoration: InputDecoration(
+              labelText: "الاسم التوضيحي",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20), gapPadding: 4)),
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () async {
+                var a = await controller.addLocation(
+                    con.text, controller.markers.first.position);
+                if (a) {
+                  Get.back();
+                  Get.back();
+                }
+              },
+              child: const Text("إضافة"))
+        ],
+      ),
+    );
   }
 }

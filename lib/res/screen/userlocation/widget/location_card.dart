@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../controller/user_location_controller.dart';
-import '../../../database/user_location.dart';
 import '../../../master_widget/color.dart';
 
 class LocationCard extends StatelessWidget {
@@ -19,6 +18,7 @@ class LocationCard extends StatelessWidget {
   final double long;
   @override
   Widget build(BuildContext context) {
+    UserLocationController userLocationContoller = Get.find();
     return Container(
       height: 250,
       margin: const EdgeInsets.all(10),
@@ -65,37 +65,7 @@ class LocationCard extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text("تنبيه"),
-                          content: const Text("هل أنت متأكد من حذف الموقع؟"),
-                          actions: [
-                            ElevatedButton(
-                                style: const ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(Colors.red)),
-                                onPressed: () async {
-                                  var del =
-                                      await UserLocation.deleteUserLocation(id);
-                                  if (del) {
-                                    UserLocationContoller co =
-                                        Get.put(UserLocationContoller());
-                                    co.delete();
-                                  }
-                                  Get.back();
-                                },
-                                child: const Text("حذف")),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: const Text("إلغاء")),
-                          ],
-                        );
-                      },
-                    );
+                    userLocationContoller.clickDeleteButton(id);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/user_info_controller.dart';
 import '../../../database/user_info.dart';
+import 'info_page_button.dart';
 import 'input_form.dart';
 
 class UserInfoBody extends StatelessWidget {
@@ -8,33 +10,27 @@ class UserInfoBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserInfoController userInfoController = Get.find();
     TextEditingController name = TextEditingController();
     TextEditingController mobile = TextEditingController();
     bool? sex;
     int? region;
-    List<DropdownMenuItem<int>> listRegion = [];
     return Padding(
       padding: const EdgeInsets.all(15),
       child: FutureBuilder<Userinfo?>(
           future: Userinfo.getUserInfo(),
           builder: (context, snapShot) {
-            if (!snapShot.hasData) {
+            if (snapShot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            name.text = snapShot.data!.name;
-            mobile.text = snapShot.data!.mobile;
-            sex = snapShot.data!.sex;
-            region = snapShot.data!.region;
-            listRegion.clear();
-            for (var element in snapShot.data!.lRegion) {
-              var d = DropdownMenuItem<int>(
-                value: element.id,
-                child: Text(element.regionName),
-              );
-              listRegion.add(d);
-            }
+            name.text = snapShot.data?.name == null ? "" : snapShot.data!.name;
+            mobile.text =
+                snapShot.data?.mobile == null ? "" : snapShot.data!.mobile;
+            sex = snapShot.data?.sex == null ? true : snapShot.data!.sex;
+            region =
+                snapShot.data?.region == null ? null : snapShot.data!.region;
             return Form(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,7 +78,8 @@ class UserInfoBody extends StatelessWidget {
                       ),
                       label: Text("المحافظة"),
                     ),
-                    items: listRegion,
+                    items: userInfoController
+                        .getRegionlist(snapShot.data!.lRegion),
                     onChanged: (value) {
                       region = value;
                     },
@@ -90,49 +87,30 @@ class UserInfoBody extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(
-                          style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(
-                              Size(MediaQuery.of(context).size.width * 0.4, 20),
-                            ),
-                          ),
-                          onPressed: () async {
-                            var b = await Userinfo.updateUserInfo(Userinfo(
-                              id: "id",
-                              name: name.text,
-                              mobile: mobile.text,
-                              sex: sex!,
-                              region: region!,
-                            ));
-                            if (b) {
-                              Get.defaultDialog(
-                                  title: "معلومات",
-                                  content:
-                                      const Text("تمت تعديل المعلومات بنجاح"),
-                                  actions: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: const Text("موافق"))
-                                  ]);
-                            }
-                          },
-                          child: const Text("حفظ")),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(
-                              Size(MediaQuery.of(context).size.width * 0.4, 20),
-                            ),
-                            backgroundColor: const MaterialStatePropertyAll(
-                              Color.fromARGB(255, 238, 194, 64),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "تغيير كلمة السر",
-                            style: TextStyle(color: Colors.black),
-                          )),
+                      InfopageButton(
+                        buttonColore: null,
+                        text: "حفظ",
+                        textColor: null,
+                        press: () {
+                          userInfoController.clickSaveButton(
+                            Userinfo(
+                                id: "id",
+                                name: name.text,
+                                mobile: mobile.text,
+                                sex: sex!,
+                                region: region!,
+                                point: 0),
+                          );
+                        },
+                      ),
+                      InfopageButton(
+                        buttonColore: Colors.amber,
+                        text: "إلغاء",
+                        textColor: Colors.white,
+                        press: () {
+                          userInfoController.clickCanselButton();
+                        },
+                      ),
                     ],
                   )
                 ],

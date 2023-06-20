@@ -10,22 +10,23 @@ class Userinfo {
   late bool sex;
   late int region;
   late List<Region> lRegion;
+  late double? point;
 
-  Userinfo({
-    required this.id,
-    required this.name,
-    required this.mobile,
-    required this.sex,
-    required this.region,
-  });
+  Userinfo(
+      {required this.id,
+      required this.name,
+      required this.mobile,
+      required this.sex,
+      required this.region,
+      required this.point});
   factory Userinfo.fromJson(Map<String, dynamic> json) {
     return Userinfo(
-      id: json["id"],
-      name: json["name"],
-      mobile: json["mobile"],
-      sex: json["sex"],
-      region: json["region"],
-    );
+        id: json["id"],
+        name: json["name"],
+        mobile: json["mobile"],
+        sex: json["sex"],
+        region: json["region"],
+        point: double.parse(json["point"].toString()));
   }
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -33,6 +34,7 @@ class Userinfo {
         "mobile": mobile,
         "sex": sex,
         "region": region,
+        "point": 0,
       };
   static Future<Userinfo?> getUserInfo() async {
     http.Response response =

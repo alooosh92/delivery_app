@@ -1,29 +1,27 @@
-import 'package:delivery_app/res/screen/home/widget/qote.dart';
-import 'package:delivery_app/res/screen/home/widget/restorant.dart';
-import 'package:delivery_app/res/screen/home/widget/search.dart';
+import 'package:delivery_app/res/controller/home_controller.dart';
+import 'package:delivery_app/res/screen/home/page/qote.dart';
+import 'package:delivery_app/res/screen/home/page/restorant.dart';
+import 'package:delivery_app/res/screen/home/page/search.dart';
 import 'package:delivery_app/res/screen/home/widget/shops.dart';
-import 'package:delivery_app/res/screen/home/widget/user_order.dart';
+import 'package:delivery_app/res/screen/home/page/user_order.dart';
 import 'package:flutter/material.dart';
-
-import '../../../controller/pageview_controller.dart';
-import 'accont.dart';
+import 'package:get/get.dart';
+import '../page/accont.dart';
 
 class AccontBody extends StatelessWidget {
   const AccontBody({
     super.key,
-    required this.pageviewController,
   });
-
-  final PageviewController pageviewController;
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
     return PageView.builder(
-      controller: pageviewController.pageController,
+      controller: homeController.pageController,
       onPageChanged: (value) {
-        pageviewController.onScroll(value);
+        homeController.onScroll(value);
       },
-      itemCount: 6,
+      itemCount: screen.length,
       itemBuilder: (context, index) {
         return screen[index];
       },
