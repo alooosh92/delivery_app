@@ -25,6 +25,11 @@ class UserInfoBody extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+            List<DropdownMenuItem<int>> regions = [];
+            for (var element in snapShot.data!.lRegion) {
+              regions.add(DropdownMenuItem(
+                  value: element.id, child: Text(element.regionName)));
+            }
             name.text = snapShot.data?.name == null ? "" : snapShot.data!.name;
             mobile.text =
                 snapShot.data?.mobile == null ? "" : snapShot.data!.mobile;
@@ -46,6 +51,12 @@ class UserInfoBody extends StatelessWidget {
                     type: TextInputType.phone,
                   ),
                   DropdownButtonFormField<bool>(
+                    validator: (value) {
+                      if (value == null) {
+                        return "لا يمكن ترك هذا الخيار فارغ";
+                      }
+                      return null;
+                    },
                     value: sex,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -69,6 +80,12 @@ class UserInfoBody extends StatelessWidget {
                     },
                   ),
                   DropdownButtonFormField<int>(
+                    validator: (value) {
+                      if (value == null) {
+                        return "لا يمكن ترك هذا الخيار فارغ";
+                      }
+                      return null;
+                    },
                     value: region,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(
@@ -78,8 +95,7 @@ class UserInfoBody extends StatelessWidget {
                       ),
                       label: Text("المحافظة"),
                     ),
-                    items: userInfoController
-                        .getRegionlist(snapShot.data!.lRegion),
+                    items: regions,
                     onChanged: (value) {
                       region = value;
                     },

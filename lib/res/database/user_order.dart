@@ -42,7 +42,7 @@ class UserOrder {
 
   static Future<List<UserOrder>> getUserOrder() async {
     http.Response response =
-        await http.get(Api.getUserOrder, headers: Api.header);
+        await http.get(Api.getUserOrder, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }
@@ -58,7 +58,7 @@ class UserOrder {
   static Future<bool> doneOrder(String id) async {
     var body = jsonEncode(id);
     http.Response response =
-        await http.put(Api.orderDone, body: body, headers: Api.header);
+        await http.put(Api.orderDone, body: body, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return false;
     }
@@ -67,8 +67,8 @@ class UserOrder {
 
   static Future<bool> deleteOrder(String id) async {
     var body = jsonEncode(id);
-    http.Response response =
-        await http.delete(Api.deleteOrder, body: body, headers: Api.header);
+    http.Response response = await http.delete(Api.deleteOrder,
+        body: body, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return false;
     }

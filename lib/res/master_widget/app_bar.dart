@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
 AppBar appBarDefult() {
   return AppBar(
     backgroundColor: ColorManager.appbarcolor,
@@ -68,5 +69,14 @@ AppBar appBarDefult() {
         );
       })
     ],
+    leading: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () {
+          if (scaffoldKey.currentState!.isDrawerOpen == false) {
+            scaffoldKey.currentState!.openDrawer();
+          } else {
+            scaffoldKey.currentState!.openEndDrawer();
+          }
+        }),
   );
 }

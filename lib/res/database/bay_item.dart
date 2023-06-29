@@ -34,7 +34,7 @@ class BayItem {
     var json = item.tojson();
     var body = jsonEncode(json);
     http.Response response =
-        await http.post(Api.bayItem, body: body, headers: Api.header);
+        await http.post(Api.bayItem, body: body, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return false;
     }

@@ -1,5 +1,5 @@
 import 'package:delivery_app/res/master_widget/services.dart';
-import 'package:delivery_app/res/screen/home/home.dart';
+import 'package:delivery_app/res/screen/auth/widget/auth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: Services(),
-      home: const MasterScreen(),
+      home: const AuthWidget(),
     );
   }
 }

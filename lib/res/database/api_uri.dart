@@ -1,14 +1,14 @@
+import 'package:get_storage/get_storage.dart';
+
+var storage = GetStorage();
+
 class Api {
-  static Map<String, String> header = {
-    "Authorization":
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImp0aSI6ImQwMTEzNmQ2LTJlMmEtNDczNi05N2JhLTNiZjdjZDAxNmUzNCIsInVpZCI6IjhhYjhjOThkLTAzOTgtNDUxMi05NWFmLTFjNjg4ZmRhNjExNSIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE2ODk3OTA0NzIsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.eTD-Yu3Je5fEGWG0I1em-dkDN9wtefF1i1WCInEcGJI",
-    "Accept": "*/*",
-    "Content-Type": "application/json"
-  };
   static String hosting = "http://10.0.2.2:5000/";
   //"http://deliveryorder-001-site1.dtempurl.com/";
+  //"http://10.0.2.2:5000/";
   static String master = "${hosting}api/";
   static String image = "${hosting}img/";
+  static String auth = "${hosting}img/";
   static Uri getUserLocation = Uri.parse("${master}app/GetUserLocation");
   static Uri getQoteTody = Uri.parse("${master}app/GetTodayQotes");
   static Uri getShopRegion = Uri.parse("${master}app/GetShopsByRegion");
@@ -26,4 +26,17 @@ class Api {
   static Uri bayItem = Uri.parse("${master}App/AddItemToOrder");
   static Uri orderDone = Uri.parse("${master}App/OrderDone");
   static Uri deleteOrder = Uri.parse("${master}App/DeleteOrder");
+  static Uri checkToken = Uri.parse("${master}Authentication/CheckToken");
+  static Uri refreshToken = Uri.parse("${master}Authentication/RefreshToken");
+  static Uri login = Uri.parse("${master}Authentication/Login");
+  static Uri register = Uri.parse("${master}Authentication/Register");
+  static Uri revokeToken = Uri.parse("${master}Authentication/RevokeToken");
+  static Map<String, String> getHeader() {
+    var token = storage.read("token");
+    return {
+      "Authorization": "Bearer $token",
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+    };
+  }
 }

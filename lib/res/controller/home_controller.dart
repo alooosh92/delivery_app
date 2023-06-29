@@ -31,21 +31,19 @@ class HomeController extends GetxController {
   List<Item> itemList = [];
   List<Shop> restorantList = [];
   List<Shop> shopList = [];
-  List<UserOrder> userOrderList = [];
   PageController pageController =
       PageController(initialPage: 0, viewportFraction: 1);
 
-  @override
-  void onInit() async {
-    getLocation();
-    getUserInfo();
-    getQoteToday();
-    getItem();
-    getshop();
-    // await getUserOrder();
-    super.onInit();
-    update();
-  }
+  // @override
+  // void onInit() async {
+  //   getLocation();
+  //   getUserInfo();
+  //   getQoteToday();
+  //   getItem();
+  //   getshop();
+  //   getUserInfo();
+  //   super.onInit();
+  // }
 
   void getLocation() async {
     locationsList.clear();
@@ -96,12 +94,12 @@ class HomeController extends GetxController {
   }
 
   Future<List<UserOrder>> getUserOrder() async {
-    userOrderList.clear();
+    List<UserOrder> orders = [];
     var list = await UserOrder.getUserOrder();
     for (var element in list) {
-      userOrderList.add(element);
+      orders.add(element);
     }
-    return userOrderList;
+    return orders;
   }
 
   void changeUserLocation(String val) {
@@ -126,6 +124,7 @@ class HomeController extends GetxController {
           var b = await UserOrder.doneOrder(id);
           if (b) {
             Get.back();
+            getUserInfo();
             await showDialogDef(
               ok: () {
                 Get.back();
@@ -201,16 +200,22 @@ class HomeController extends GetxController {
   }
 
   void clickBtnUserInfoScreen() {
+    Get.back();
     Get.to(const UserInfoScreen());
   }
 
   void clickBtnUserLocationScreen() {
+    Get.back();
     Get.to(const UserLocationScreen());
   }
 
-  void clickBtnSetting() {}
+  void clickBtnSetting() {
+    Get.back();
+  }
 
-  void clickBtnConuctUs() {}
+  void clickBtnConuctUs() {
+    Get.back();
+  }
 
   void clickBtnAddRequstInMap() {
     Get.to(MapScreen(text: 'تحديد مكان استلام الطلب', press: () {}));
@@ -241,6 +246,9 @@ class HomeController extends GetxController {
       ok: () async {
         Get.back();
         await UserOrder.doneOrder(id);
+        await getUserOrder();
+        getUserInfo();
+        update();
       },
       close: () {
         Get.back();
@@ -251,8 +259,6 @@ class HomeController extends GetxController {
       masseg:
           "هل أنت متأكد من تثبيت الطلبية؟\nملاحظة: بعد تأكيد الطلبية لا يمكن إلغائها أو تعديلها",
     );
-    await getUserOrder();
-    update();
   }
 
   List<Widget> qoteListScreen() {

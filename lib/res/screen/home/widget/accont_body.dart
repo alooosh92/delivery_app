@@ -6,7 +6,6 @@ import 'package:delivery_app/res/screen/home/widget/shops.dart';
 import 'package:delivery_app/res/screen/home/page/user_order.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../page/accont.dart';
 
 class AccontBody extends StatelessWidget {
   const AccontBody({
@@ -35,5 +34,4 @@ List screen = [
   const RestorantScreen(),
   const ShopsScreen(),
   const UserOrderScreen(),
-  const AccontScreen(),
 ];

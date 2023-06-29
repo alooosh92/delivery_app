@@ -1,3 +1,4 @@
+import 'package:delivery_app/res/controller/auth_controller.dart';
 import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:delivery_app/res/screen/home/widget/elevate_button_accont.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,12 @@ class AccontScreen extends StatelessWidget {
                   ElevateButtonAccont(
                       text: 'تواصل معنا',
                       press: homeController.clickBtnConuctUs),
+                  ElevateButtonAccont(
+                      text: 'تسجيل خروج',
+                      press: () async {
+                        AuthController.logout();
+                        Get.back();
+                      }),
                 ],
               ),
             ),

@@ -38,7 +38,7 @@ class ItemInfo {
   static Future<ItemInfo?> getItemInfo(String id) async {
     var body = jsonEncode(id);
     http.Response response =
-        await http.post(Api.getItemInfo, body: body, headers: Api.header);
+        await http.post(Api.getItemInfo, body: body, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return null;
     }

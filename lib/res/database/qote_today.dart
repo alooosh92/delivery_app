@@ -24,7 +24,7 @@ class QoteToday {
 
   static Future<List<QoteToday>> getQoteToday() async {
     http.Response response =
-        await http.get(Api.getQoteTody, headers: Api.header);
+        await http.get(Api.getQoteTody, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }

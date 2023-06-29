@@ -31,7 +31,7 @@ class Item {
   }
   static Future<List<Item>> getItemByEvaluation() async {
     http.Response response =
-        await http.get(Api.getItemByEvaluation, headers: Api.header);
+        await http.get(Api.getItemByEvaluation, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }
@@ -47,7 +47,7 @@ class Item {
   static Future<List<Item>> getItemByShop(String id) async {
     var json = jsonEncode(id);
     http.Response response =
-        await http.post(Api.getItemShop, headers: Api.header, body: json);
+        await http.post(Api.getItemShop, headers: Api.getHeader(), body: json);
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }

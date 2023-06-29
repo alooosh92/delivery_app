@@ -31,9 +31,6 @@ class BottomNavigationBarDefulte extends StatelessWidget {
             bNBI(Icons.shopping_cart_outlined, 'Order', () {
               controller.pageClick(4);
             }),
-            bNBI(Icons.person, 'Acconte', () {
-              controller.pageClick(5);
-            }),
           ],
         );
       },

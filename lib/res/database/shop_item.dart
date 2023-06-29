@@ -24,7 +24,7 @@ class ShopItem {
   static Future<ShopItem?> getShop(String id) async {
     var json = jsonEncode(id);
     http.Response response =
-        await http.post(Api.getShop, headers: Api.header, body: json);
+        await http.post(Api.getShop, headers: Api.getHeader(), body: json);
     if (response.statusCode != 200 || response.body.isEmpty) {
       return null;
     }

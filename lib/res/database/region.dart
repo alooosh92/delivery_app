@@ -14,7 +14,8 @@ class Region {
     return Region(id: json["id"], regionName: json["regionName"]);
   }
   static Future<List<Region>> getRegion() async {
-    http.Response response = await http.get(Api.getRegion, headers: Api.header);
+    http.Response response =
+        await http.get(Api.getRegion, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return List.empty();
     }

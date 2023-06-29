@@ -25,7 +25,7 @@ class UserLocation {
   }
   static Future<List<UserLocation>> getUserLocation() async {
     http.Response response =
-        await http.get(Api.getUserLocation, headers: Api.header);
+        await http.get(Api.getUserLocation, headers: Api.getHeader());
     List<UserLocation> lUL = [];
     if (response.statusCode != 200 || response.body.isEmpty) return lUL;
     var body = jsonDecode(response.body);
@@ -44,8 +44,8 @@ class UserLocation {
       "user": "string"
     };
     var body = jsonEncode(json);
-    http.Response response =
-        await http.post(Api.addUserLocation, headers: Api.header, body: body);
+    http.Response response = await http.post(Api.addUserLocation,
+        headers: Api.getHeader(), body: body);
     if (response.statusCode == 200) {
       return true;
     }
@@ -55,7 +55,7 @@ class UserLocation {
   static Future<bool> deleteUserLocation(String id) async {
     var body = jsonEncode(id);
     http.Response response = await http.delete(Api.deleteUserllocation,
-        body: body, headers: Api.header);
+        body: body, headers: Api.getHeader());
     if (response.statusCode != 200 || response.body.isEmpty) {
       return false;
     }
