@@ -68,4 +68,13 @@ class AuthController extends GetxController {
     }
     return false;
   }
+
+  static Future<bool> forgetPassword(String email) async {
+    return true;
+  }
+
+  static Future<bool> changePassword(
+      String oldPassword, String newPassword) async {
+    return true;
+  }
 }

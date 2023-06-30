@@ -28,6 +28,9 @@ class AccontScreen extends StatelessWidget {
                       text: 'عناويني',
                       press: homeController.clickBtnUserLocationScreen),
                   ElevateButtonAccont(
+                      text: "تعديل كلمة المرور",
+                      press: homeController.clickBtnChangepassword),
+                  ElevateButtonAccont(
                       text: 'الإعدادات', press: homeController.clickBtnSetting),
                   ElevateButtonAccont(
                       text: 'تواصل معنا',

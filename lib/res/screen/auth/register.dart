@@ -179,6 +179,9 @@ class RegisterScreen extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
+                          Get.dialog(const Center(
+                            child: CircularProgressIndicator(),
+                          ));
                           var b = await AuthController.register(
                               username.text,
                               password.text,
@@ -193,7 +196,7 @@ class RegisterScreen extends StatelessWidget {
                               const SnackBar(
                                 content: Center(
                                     child: Text(
-                                        "اسم المستخدم او كلمة المرور خاطئة")),
+                                        "البريد الالكتروني مستخدم مسبقاً")),
                               ),
                             );
                           }

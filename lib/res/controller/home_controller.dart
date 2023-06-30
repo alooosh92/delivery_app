@@ -1,5 +1,6 @@
 import 'package:delivery_app/res/controller/map_controller.dart';
 import 'package:delivery_app/res/master_widget/show_dialog_def.dart';
+import 'package:delivery_app/res/screen/auth/change_password.dart';
 import 'package:delivery_app/res/screen/item/item.dart';
 import 'package:delivery_app/res/screen/shop/shop.dart';
 import 'package:delivery_app/res/screen/userinfo/user_info.dart';
@@ -207,6 +208,11 @@ class HomeController extends GetxController {
   void clickBtnUserLocationScreen() {
     Get.back();
     Get.to(const UserLocationScreen());
+  }
+
+  void clickBtnChangepassword() {
+    Get.back();
+    Get.to(const ChangePasswordScreen());
   }
 
   void clickBtnSetting() {
