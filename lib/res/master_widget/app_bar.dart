@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
+GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 AppBar appBarDefult() {
   return AppBar(
     backgroundColor: ColorManager.appbarcolor,

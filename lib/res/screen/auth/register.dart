@@ -17,7 +17,7 @@ class RegisterScreen extends StatelessWidget {
     TextEditingController mobile = TextEditingController();
     bool? sex;
     int? region;
-    final formKey = GlobalKey<FormState>();
+    final formRegisterKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -25,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.93,
             child: Form(
-              key: formKey,
+              key: formRegisterKey,
               autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -178,7 +178,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
+                        if (formRegisterKey.currentState!.validate()) {
                           Get.dialog(const Center(
                             child: CircularProgressIndicator(),
                           ));

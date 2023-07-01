@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:delivery_app/res/database/api_uri.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
@@ -71,6 +70,38 @@ class AuthServies {
     var storg = GetStorage();
     storg.write("token", bBody["token"]);
     storg.write("refreshToken", bBody["refreshToken"]);
+    return true;
+  }
+
+  static Future<bool> changePassword(
+      String oldpassword, String newPassword) async {
+    Map<String, dynamic> map = {
+      "oldpassword": oldpassword,
+      "newpassword": newPassword
+    };
+    var body = jsonEncode(map);
+    http.Response response = await http.post(Api.changePassword,
+        headers: Api.getHeader(), body: body);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
+    var bBody = jsonDecode(response.body);
+    if (bBody["email"] == null) {
+      return false;
+    }
+    var storg = GetStorage();
+    storg.write("token", bBody["token"]);
+    storg.write("refreshToken", bBody["refreshToken"]);
+    return true;
+  }
+
+  static Future<bool> forgetPassword(String email) async {
+    var body = jsonEncode(email);
+    http.Response response = await http.post(Api.forgetPassword,
+        headers: Api.getHeader(), body: body);
+    if (response.statusCode != 200 || response.body.isEmpty) {
+      return false;
+    }
     return true;
   }
 

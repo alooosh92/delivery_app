@@ -70,11 +70,16 @@ class AuthController extends GetxController {
   }
 
   static Future<bool> forgetPassword(String email) async {
+    var b = await AuthServies.forgetPassword(email);
+    if (b) {
+      Get.offAll(const LoginScreen());
+    }
     return true;
   }
 
   static Future<bool> changePassword(
       String oldPassword, String newPassword) async {
-    return true;
+    var b = await AuthServies.changePassword(oldPassword, newPassword);
+    return b;
   }
 }

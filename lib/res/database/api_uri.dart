@@ -31,6 +31,10 @@ class Api {
   static Uri login = Uri.parse("${master}Authentication/Login");
   static Uri register = Uri.parse("${master}Authentication/Register");
   static Uri revokeToken = Uri.parse("${master}Authentication/RevokeToken");
+  static Uri changePassword =
+      Uri.parse("${master}Authentication/ChangePassword");
+  static Uri forgetPassword =
+      Uri.parse("${master}Authentication/ForgetPassword");
   static Map<String, String> getHeader() {
     var token = storage.read("token");
     return {

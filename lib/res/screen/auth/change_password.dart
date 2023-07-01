@@ -1,3 +1,6 @@
+import 'package:delivery_app/res/database/auth.dart';
+import 'package:delivery_app/res/master_widget/show_dialog_def.dart';
+import 'package:delivery_app/res/screen/auth/login.dart';
 import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +12,7 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+    final formChangePasswordKey = GlobalKey<FormState>();
     TextEditingController oldPassword = TextEditingController();
     TextEditingController newPassword = TextEditingController();
     TextEditingController confirmPassword = TextEditingController();
@@ -20,7 +23,7 @@ class ChangePasswordScreen extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.94,
             child: Form(
-              key: formKey,
+              key: formChangePasswordKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -73,13 +76,21 @@ class ChangePasswordScreen extends StatelessWidget {
                       icon: Icons.password),
                   ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
+                        if (formChangePasswordKey.currentState!.validate()) {
                           Get.dialog(
                               const Center(child: CircularProgressIndicator()));
                           var b = await AuthController.changePassword(
                               oldPassword.text, newPassword.text);
                           if (b) {
-                            //  Get.offAll(const LoginScreen());
+                            Get.back();
+                            showDialogDef(
+                                ok: () async {
+                                  await AuthServies.logout();
+                                  Get.offAll(const LoginScreen());
+                                },
+                                okText: "موافق",
+                                title: "ملاحظات",
+                                masseg: "تم تعديل كلمة المرور بنجاح");
                           }
                         }
                       },

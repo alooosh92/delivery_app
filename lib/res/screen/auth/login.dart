@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController username = TextEditingController();
     TextEditingController password = TextEditingController();
-    final formKey = GlobalKey<FormState>();
+    final formLoginKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.94,
             child: Form(
-              key: formKey,
+              key: formLoginKey,
               autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
+                        if (formLoginKey.currentState!.validate()) {
                           Get.dialog(const Center(
                             child: CircularProgressIndicator(),
                           ));

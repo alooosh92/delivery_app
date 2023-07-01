@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 class LocalizationsManager {
   static void getLangValue() async {
-    var shared = await GetStorage();
+    var shared = GetStorage();
     var l = shared.read('lang');
     if (l == null || l.isEmpty) {
       locale = const Locale('ar');
@@ -26,7 +26,7 @@ class LocalizationsManager {
   }
 
   static void setLangValue(String lang) async {
-    var shared = await GetStorage();
+    var shared = GetStorage();
     shared.write('lang', lang);
   }
 

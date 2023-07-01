@@ -1,5 +1,4 @@
 import 'package:delivery_app/res/controller/auth_controller.dart';
-import 'package:delivery_app/res/screen/auth/login.dart';
 import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,12 +9,12 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController email = TextEditingController();
-    final formKey = GlobalKey<FormState>();
+    final formForgetPasswordKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(
-          key: formKey,
+          key: formForgetPasswordKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,13 +39,10 @@ class ForgetPasswordScreen extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    if (formKey.currentState!.validate()) {
+                    if (formForgetPasswordKey.currentState!.validate()) {
                       Get.dialog(
                           const Center(child: CircularProgressIndicator()));
-                      var b = await AuthController.forgetPassword(email.text);
-                      if (b) {
-                        Get.offAll(const LoginScreen());
-                      }
+                      await AuthController.forgetPassword(email.text);
                     }
                   },
                   child: const Text("اعادة تعيين كلمة السر")),
