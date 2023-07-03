@@ -93,6 +93,7 @@ class LoginScreen extends StatelessWidget {
                           if (!b) {
                             // ignore: use_build_context_synchronously
                             if (!context.mounted) return;
+                            Get.back();
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Center(

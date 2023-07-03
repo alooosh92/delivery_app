@@ -251,9 +251,13 @@ class HomeController extends GetxController {
     showDialogDef(
       ok: () async {
         Get.back();
+        Get.dialog(const Center(
+          child: CircularProgressIndicator(),
+        ));
         await UserOrder.doneOrder(id);
         await getUserOrder();
         getUserInfo();
+        Get.back();
         update();
       },
       close: () {

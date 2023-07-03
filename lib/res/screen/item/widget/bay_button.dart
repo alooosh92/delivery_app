@@ -66,6 +66,10 @@ class BayButton extends StatelessWidget {
                           Get.back();
                         });
                   }
+                  Get.back();
+                  Get.dialog(const Center(
+                    child: CircularProgressIndicator(),
+                  ));
                   var item = BayItem(
                       item: id,
                       numberOfItem: int.parse(num.text),
