@@ -1,4 +1,5 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
+import 'package:delivery_app/res/master_widget/tr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../database/user_order.dart';
@@ -82,16 +83,15 @@ class UserOrderWidget extends StatelessWidget {
                                       await UserOrder.deleteOrder(id);
                                       Get.back();
                                     },
-                                    child: const Text("تاكيد")),
+                                    child: Text(Tr.confirming.tr)),
                                 ElevatedButton(
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: const Text("إلغاء"))
+                                    child: Text(Tr.cancel.tr))
                               ],
-                              title: const Text("حذف الطلبية"),
-                              content:
-                                  const Text("هل أنت متأكد من حذف الطلبية"),
+                              title: Text(Tr.deleteOrder.tr),
+                              content: Text(Tr.deleteOrderQ.tr),
                             ));
                           },
                           child: const Icon(Icons.delete),
@@ -132,10 +132,10 @@ class UserOrderWidget extends StatelessWidget {
                               Container(
                                 height: 20,
                                 color: Colors.black38,
-                                child: const Center(
+                                child: Center(
                                   child: Text(
-                                    "اجمالي الفاتورة",
-                                    style: TextStyle(
+                                    Tr.total.tr,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),
                                   ),
@@ -162,10 +162,10 @@ class UserOrderWidget extends StatelessWidget {
                               Container(
                                 height: 20,
                                 color: Colors.black38,
-                                child: const Center(
+                                child: Center(
                                   child: Text(
-                                    "أجور التوصيل",
-                                    style: TextStyle(
+                                    Tr.deliveryPrice.tr,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),
                                   ),
@@ -190,10 +190,10 @@ class UserOrderWidget extends StatelessWidget {
                               Container(
                                 height: 20,
                                 color: ColorManager.appbarcolor,
-                                child: const Center(
+                                child: Center(
                                   child: Text(
-                                    "المجموع",
-                                    style: TextStyle(
+                                    Tr.total.tr,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),
                                   ),
@@ -223,16 +223,17 @@ class UserOrderWidget extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    const Text("التفاصيل"),
-                    Text("التاريخ: ${createTime.toString().substring(0, 10)}"),
+                    Text(Tr.information.tr),
                     Text(
-                        "وقت التقديم: ${createTime.toString().substring(11, 17)}"),
+                        "${Tr.date.tr} ${createTime.toString().substring(0, 10)}"),
                     Text(
-                        "وقت التثبيت: ${confirmOrder == null ? "لا يوجد" : confirmOrder.toString().substring(11, 17)}"),
+                        "${Tr.createTime.tr} ${createTime.toString().substring(11, 17)}"),
                     Text(
-                        "وقت القبول: ${accseptOrder == null ? "لا يوجد" : accseptOrder.toString().substring(11, 17)}"),
+                        "${Tr.confirmTime.tr} ${confirmOrder == null ? Tr.notSet.tr : confirmOrder.toString().substring(11, 17)}"),
                     Text(
-                        "وقت التسليم: ${deliveryTime == null ? "لا يوجد" : deliveryTime.toString().substring(11, 17)}"),
+                        "${Tr.acceptanceTime.tr} ${accseptOrder == null ? Tr.notSet.tr : accseptOrder.toString().substring(11, 17)}"),
+                    Text(
+                        "${Tr.delivryTime.tr} ${deliveryTime == null ? Tr.notSet.tr : deliveryTime.toString().substring(11, 17)}"),
                     Container(
                       padding: const EdgeInsets.only(
                           bottom: 3, right: 5, left: 5, top: 3),
@@ -240,7 +241,7 @@ class UserOrderWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           color: ColorManager.appbarcolor),
                       child: Text(
-                        'كود الاستلام: $code',
+                        '${Tr.pinCode.tr} $code',
                         style: const TextStyle(
                             color: ColorManager.textWhite,
                             fontWeight: FontWeight.w700),

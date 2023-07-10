@@ -5,6 +5,8 @@ import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../master_widget/tr.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -12,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController username = TextEditingController();
     TextEditingController password = TextEditingController();
-    final formLoginKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -37,15 +39,15 @@ class LoginScreen extends StatelessWidget {
                           controller: username,
                           hide: false,
                           icon: Icons.email,
-                          label: "البريد الالكتروني",
+                          label: Tr.emailAdrees.tr,
                           type: TextInputType.emailAddress,
                           valida: (value) {
                             if (value == null || value.isEmpty) {
-                              return "لا يمكن ترك هذه القيمة فارغة";
+                              return Tr.plaseInsertEmailAdress.tr;
                             } else {
                               if (!value.contains("@") ||
                                   !value.contains(".")) {
-                                return "الرجاء ادخال ايميل صحيح";
+                                return Tr.currectEmail.tr;
                               }
                             }
                             return null;
@@ -56,14 +58,14 @@ class LoginScreen extends StatelessWidget {
                           controller: password,
                           hide: true,
                           icon: Icons.password,
-                          label: "كلمة السر",
+                          label: Tr.password.tr,
                           type: TextInputType.visiblePassword,
                           valida: (value) {
                             if (value == null || value.isEmpty) {
-                              return "لا يمكن ترك هذه القيمة فارغة";
+                              return Tr.plaseInsertPassword.tr;
                             } else {
                               if (value.length < 6) {
-                                return "كلمة المرور أقصر من اللازم";
+                                return Tr.palseInsert6LaterAtLess.tr;
                               }
                             }
                             return null;
@@ -76,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: () {
                                   Get.to(const ForgetPasswordScreen());
                                 },
-                                child: const Text("نسيت كلمة السر؟"))
+                                child: Text(Tr.forgetPassword.tr))
                           ],
                         ),
                       ],
@@ -95,23 +97,22 @@ class LoginScreen extends StatelessWidget {
                             if (!context.mounted) return;
                             Get.back();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                              SnackBar(
                                 content: Center(
-                                    child: Text(
-                                        "اسم المستخدم او كلمة المرور خاطئة")),
+                                    child: Text(Tr.wrongEmailAngPassword.tr)),
                               ),
                             );
                           }
                         }
                       },
-                      child: const Text("تسجيل الدخول")),
+                      child: Text(Tr.login.tr)),
                   TextButton(
                       onPressed: () {
                         Get.to(const RegisterScreen());
                       },
-                      child: const Text("هل تملك حساب؟ سجل من هنا مجاناً")),
-                  const Center(
-                    child: Text("جميع الحقوق محفوطة لشركة تيكنو"),
+                      child: Text(Tr.youDoNotHaveAnAccont.tr)),
+                  Center(
+                    child: Text(Tr.allRieghtReserved.tr),
                   )
                 ],
               ),

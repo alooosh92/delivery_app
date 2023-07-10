@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 var storage = GetStorage();
 
 class Api {
-  static String hosting = "http://10.0.2.2:5000/";
+  static String hosting = "http://deliveryorder-001-site1.dtempurl.com/";
   //"http://deliveryorder-001-site1.dtempurl.com/";
   //"http://10.0.2.2:5000/";
   static String master = "${hosting}api/";

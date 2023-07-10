@@ -1,9 +1,9 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../database/bay_item.dart';
 import '../../../master_widget/show_dialog_def.dart';
+import '../../../master_widget/tr.dart';
 
 class BayButton extends StatelessWidget {
   const BayButton({
@@ -23,7 +23,7 @@ class BayButton extends StatelessWidget {
         TextEditingController not = TextEditingController();
         Get.dialog(
           AlertDialog(
-            title: const Text("إضافة طلب شراء"),
+            title: Text(Tr.addBasket.tr),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -31,7 +31,7 @@ class BayButton extends StatelessWidget {
                   controller: num,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: "العدد",
+                      labelText: Tr.number.tr,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           gapPadding: 4)),
@@ -41,7 +41,7 @@ class BayButton extends StatelessWidget {
                   controller: not,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      labelText: "ملاحظات الطلب",
+                      labelText: Tr.notes.tr,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           gapPadding: 4)),
@@ -59,9 +59,9 @@ class BayButton extends StatelessWidget {
                   if (ac.userlocationId == null) {
                     Get.back();
                     return showDialogDef(
-                        masseg: "الرجاء تحديد موقع التوصيل",
-                        title: "تحذير",
-                        okText: "موافق",
+                        masseg: Tr.selectLocation.tr,
+                        title: Tr.warning.tr,
+                        okText: Tr.ok.tr,
                         ok: () {
                           Get.back();
                         });
@@ -80,31 +80,30 @@ class BayButton extends StatelessWidget {
                   Get.back();
                   if (b) {
                     return showDialogDef(
-                        masseg:
-                            "تمت اضافة الطلبية بنجاح\nملاحظة: يجب تثبيت الطلبية بعد الانتهاء",
-                        title: "ملاحظات",
-                        okText: "موافق",
+                        masseg: Tr.successfullyConfirmTheOrder.tr,
+                        title: Tr.notes.tr,
+                        okText: Tr.ok.tr,
                         ok: () {
                           Get.back();
                         });
                   }
                 },
-                child: const Text(
-                  "شراء",
-                  style: TextStyle(color: Colors.black),
+                child: Text(
+                  Tr.bay.tr,
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
                   Get.back();
                 },
-                child: const Text("إلغاء"),
+                child: Text(Tr.cancel.tr),
               )
             ],
           ),
         );
       },
-      child: const Text("إضافة الى السلة"),
+      child: Text(Tr.addToBasket.tr),
     );
   }
 }

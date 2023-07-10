@@ -1,4 +1,6 @@
+import 'package:delivery_app/res/master_widget/tr.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TabelRowheadColum extends StatelessWidget {
   const TabelRowheadColum({super.key, required this.text});
@@ -20,11 +22,11 @@ class TabelRowheadColum extends StatelessWidget {
 }
 
 TableRow tabelRowHeader() {
-  return const TableRow(
+  return TableRow(
     children: [
-      TabelRowheadColum(text: "المادة المطلوبة"),
-      TabelRowheadColum(text: "العدد"),
-      TabelRowheadColum(text: "السعر"),
+      TabelRowheadColum(text: Tr.itemName.tr),
+      TabelRowheadColum(text: Tr.number.tr),
+      TabelRowheadColum(text: Tr.price.tr),
     ],
   );
 }

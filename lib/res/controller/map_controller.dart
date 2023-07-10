@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../database/user_location.dart';
+import '../master_widget/tr.dart';
 import 'home_controller.dart';
 
 class MapController extends GetxController {
@@ -27,18 +28,17 @@ class MapController extends GetxController {
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      return Future.error(Tr.locationServicesAreDisabled.tr);
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error(Tr.locationPermissionsDenied.tr);
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error(Tr.locationPermissionsDenied.tr);
     }
     var l = await Geolocator.getCurrentPosition();
     return l;
@@ -56,11 +56,11 @@ class MapController extends GetxController {
     TextEditingController con = TextEditingController();
     Get.dialog(
       AlertDialog(
-        title: const Text("الرجاء ادخال اسم توضيحي للموقع"),
+        title: Text(Tr.addLocationName.tr),
         content: TextFormField(
           controller: con,
           decoration: InputDecoration(
-              labelText: "الاسم التوضيحي",
+              labelText: Tr.locationName.tr,
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20), gapPadding: 4)),
         ),
@@ -74,7 +74,7 @@ class MapController extends GetxController {
                   Get.back();
                 }
               },
-              child: const Text("إضافة"))
+              child: Text(Tr.add.tr))
         ],
       ),
     );

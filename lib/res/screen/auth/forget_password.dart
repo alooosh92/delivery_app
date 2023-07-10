@@ -2,6 +2,7 @@ import 'package:delivery_app/res/controller/auth_controller.dart';
 import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../master_widget/tr.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -9,7 +10,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController email = TextEditingController();
-    final formForgetPasswordKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formForgetPasswordKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -20,14 +21,14 @@ class ForgetPasswordScreen extends StatelessWidget {
             children: [
               AuthTextFormField(
                   controller: email,
-                  label: "البريد الإلكتروني",
+                  label: Tr.emailAdrees.tr,
                   type: TextInputType.emailAddress,
                   valida: (value) {
                     if (value == null || value.isEmpty) {
-                      return "لا يمكن ترك هذه القيمة فارغة";
+                      return Tr.plaseInsertEmailAdress.tr;
                     } else {
                       if (!value.contains("@") || !value.contains(".")) {
-                        return "الرجاء ادخال ايميل صحيح";
+                        return Tr.currectEmail.tr;
                       }
                     }
                     return null;
@@ -45,7 +46,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       await AuthController.forgetPassword(email.text);
                     }
                   },
-                  child: const Text("اعادة تعيين كلمة السر")),
+                  child: Text(Tr.changePassword.tr)),
             ],
           ),
         ),

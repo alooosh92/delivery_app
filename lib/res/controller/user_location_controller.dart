@@ -1,14 +1,14 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../database/user_location.dart';
+import '../master_widget/tr.dart';
 
 class UserLocationController extends GetxController {
   void clickDeleteButton(String id) {
     Get.dialog(AlertDialog(
-      title: const Text("تنبيه"),
-      content: const Text("هل أنت متأكد من حذف الموقع؟"),
+      title: Text(Tr.warning.tr),
+      content: Text(Tr.deleteLocation.tr),
       actions: [
         ElevatedButton(
             style: const ButtonStyle(
@@ -23,12 +23,12 @@ class UserLocationController extends GetxController {
               }
               Get.back();
             },
-            child: const Text("حذف")),
+            child: Text(Tr.delete.tr)),
         ElevatedButton(
             onPressed: () {
               Get.back();
             },
-            child: const Text("إلغاء")),
+            child: Text(Tr.cancel.tr)),
       ],
     ));
   }

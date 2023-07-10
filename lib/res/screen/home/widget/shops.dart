@@ -1,4 +1,5 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
+import 'package:delivery_app/res/master_widget/tr.dart';
 import 'package:delivery_app/res/screen/home/widget/shop_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class ShopsScreen extends StatelessWidget {
     HomeController homeController = Get.find();
     return ShopWidget(
       shopList: homeController.shopList,
-      text: 'اسم المحل',
+      text: Tr.shopName.tr,
     );
   }
 }

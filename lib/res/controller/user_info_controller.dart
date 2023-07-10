@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../database/region.dart';
 import '../database/user_info.dart';
+import '../master_widget/tr.dart';
 
 class UserInfoController extends GetxController {
   List<DropdownMenuItem<int>> getRegionlist(List<Region> regions) {
@@ -20,14 +21,14 @@ class UserInfoController extends GetxController {
     var b = await Userinfo.updateUserInfo(userinfo);
     if (b) {
       Get.defaultDialog(
-        title: "معلومات",
-        content: const Text("تمت تعديل المعلومات بنجاح"),
+        title: Tr.information.tr,
+        content: Text(Tr.dataHasUpdated.tr),
         actions: [
           ElevatedButton(
               onPressed: () {
                 Get.back();
               },
-              child: const Text("موافق"))
+              child: Text(Tr.ok.tr))
         ],
       );
     }

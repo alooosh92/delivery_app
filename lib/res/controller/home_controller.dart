@@ -2,6 +2,7 @@ import 'package:delivery_app/res/controller/map_controller.dart';
 import 'package:delivery_app/res/master_widget/show_dialog_def.dart';
 import 'package:delivery_app/res/screen/auth/change_password.dart';
 import 'package:delivery_app/res/screen/item/item.dart';
+import 'package:delivery_app/res/screen/setting/setting.dart';
 import 'package:delivery_app/res/screen/shop/shop.dart';
 import 'package:delivery_app/res/screen/userinfo/user_info.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../database/shop.dart';
 import '../database/user_info.dart';
 import '../database/user_location.dart';
 import '../database/user_order.dart';
+import '../master_widget/tr.dart';
 import '../screen/home/widget/image_card.dart';
 import '../screen/home/widget/info_card.dart';
 import '../screen/home/widget/row_descoine.dart';
@@ -130,9 +132,9 @@ class HomeController extends GetxController {
               ok: () {
                 Get.back();
               },
-              okText: "موافق",
-              title: "ملاحظة",
-              masseg: "تم تأكيد الطلبية بنجاح",
+              okText: Tr.ok.tr,
+              title: Tr.notes.tr,
+              masseg: Tr.successfullyConfirmTheOrder.tr,
             );
           } else {
             Get.back();
@@ -140,17 +142,16 @@ class HomeController extends GetxController {
               ok: () {
                 Get.back();
               },
-              okText: "موافق",
-              title: "تحذير",
-              masseg: "حدث خطأ ما الرجاء التواصل معنا",
+              okText: Tr.ok.tr,
+              title: Tr.warning.tr,
+              masseg: Tr.somethingWentWrongPleaseContactUs.tr,
             );
           }
         },
-        okText: "تأكيد",
-        title: "تنبيه",
-        masseg:
-            "هل أنت متأكد من تثبيت الطلبية \n ملاحظة: لايمكن حذف او تعديل الطلبية بعد التثبيت",
-        closText: "إلغاء",
+        okText: Tr.confirmation.tr,
+        title: Tr.warning.tr,
+        masseg: Tr.areYouSureToInstallTheOrder.tr,
+        closText: Tr.cancel.tr,
         close: () {
           Get.back();
         },
@@ -171,9 +172,9 @@ class HomeController extends GetxController {
               ok: () {
                 Get.back();
               },
-              okText: "موافق",
-              title: "ملاحظة",
-              masseg: "تم حذف الطلبية بنجاح",
+              okText: Tr.ok.tr,
+              title: Tr.notes.tr,
+              masseg: Tr.deleteOrder.tr,
             );
           } else {
             Get.back();
@@ -181,19 +182,19 @@ class HomeController extends GetxController {
               ok: () {
                 Get.back();
               },
-              okText: "موافق",
-              title: "تحذير",
-              masseg: "حدث خطأ ما الرجاء التواصل معنا",
+              okText: Tr.ok.tr,
+              title: Tr.warning.tr,
+              masseg: Tr.somethingWentWrongPleaseContactUs.tr,
             );
           }
         },
         close: () {
           Get.back();
         },
-        okText: "حذف",
-        closText: "إلغاء",
-        title: "تحذير",
-        masseg: "هل أنت متأكد من حذف هذه الطلبية؟",
+        okText: Tr.delete.tr,
+        closText: Tr.cancel.tr,
+        title: Tr.warning.tr,
+        masseg: Tr.deleteOrderQ.tr,
       ),
     );
     await getUserOrder();
@@ -217,6 +218,7 @@ class HomeController extends GetxController {
 
   void clickBtnSetting() {
     Get.back();
+    Get.to(const SettingSecreen());
   }
 
   void clickBtnConuctUs() {
@@ -224,7 +226,7 @@ class HomeController extends GetxController {
   }
 
   void clickBtnAddRequstInMap() {
-    Get.to(MapScreen(text: 'تحديد مكان استلام الطلب', press: () {}));
+    Get.to(MapScreen(text: Tr.placeToReceive.tr, press: () {}));
   }
 
   void pageIndex(double index) {
@@ -249,26 +251,24 @@ class HomeController extends GetxController {
 
   void onOrderClick(String id) async {
     showDialogDef(
-      ok: () async {
-        Get.back();
-        Get.dialog(const Center(
-          child: CircularProgressIndicator(),
-        ));
-        await UserOrder.doneOrder(id);
-        await getUserOrder();
-        getUserInfo();
-        Get.back();
-        update();
-      },
-      close: () {
-        Get.back();
-      },
-      closText: "إلغاء",
-      okText: "تثبيت",
-      title: "تأكيد الطلبية",
-      masseg:
-          "هل أنت متأكد من تثبيت الطلبية؟\nملاحظة: بعد تأكيد الطلبية لا يمكن إلغائها أو تعديلها",
-    );
+        ok: () async {
+          Get.back();
+          Get.dialog(const Center(
+            child: CircularProgressIndicator(),
+          ));
+          await UserOrder.doneOrder(id);
+          await getUserOrder();
+          getUserInfo();
+          Get.back();
+          update();
+        },
+        close: () {
+          Get.back();
+        },
+        closText: Tr.cancel.tr,
+        okText: Tr.confirmation.tr,
+        title: Tr.orderConfirm.tr,
+        masseg: Tr.areYouSureToInstallTheOrder.tr);
   }
 
   List<Widget> qoteListScreen() {
@@ -314,7 +314,7 @@ class HomeController extends GetxController {
       to.longitude,
     );
     var price = ((p / 1000).ceil()) * 1500;
-    return price > 100000 ? "حدد العنوان" : price.toString();
+    return price > 100000 ? Tr.selectLocation.tr : price.toString();
   }
 
   List<Widget> getListShop(List<Shop> listShop) {
@@ -369,14 +369,13 @@ DropdownMenuItem<String> dropdownMenuItemDefAdd() {
       onTap: () {
         Get.back();
         Get.to(
-          MapScreen(
-              text: 'إضافة الموقع محدد إلى المفضلة', press: mc.clickMapButton),
+          MapScreen(text: Tr.addLocation.tr, press: mc.clickMapButton),
         );
       },
-      child: const Row(
+      child: Row(
         children: [
-          Icon(Icons.add_box_outlined),
-          Text('إضافة موقع جديد'),
+          const Icon(Icons.add_box_outlined),
+          Text(Tr.addNewLocation.tr),
         ],
       ),
     ),

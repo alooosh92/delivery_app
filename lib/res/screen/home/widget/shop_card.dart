@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../database/shop.dart';
 import '../../../master_widget/color.dart';
+import '../../../master_widget/tr.dart';
 
 class ShopCard extends StatelessWidget {
   const ShopCard({super.key, required this.shop});
@@ -91,9 +92,9 @@ class ShopCard extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(left: 5, right: 5),
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: const Text(
-                          'تكلفة التوصيل الى الموقع المحدد',
-                          style: TextStyle(
+                        child: Text(
+                          Tr.deliveryCost.tr,
+                          style: const TextStyle(
                             fontSize: 8,
                             fontWeight: FontWeight.w900,
                           ),

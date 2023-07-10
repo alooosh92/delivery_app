@@ -1,5 +1,6 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:delivery_app/res/master_widget/color.dart';
+import 'package:delivery_app/res/master_widget/tr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -19,9 +20,9 @@ AppBar appBarDefult() {
             color: ColorManager.textWhite,
           ),
           isExpanded: true,
-          hint: const Text(
-            'التوصيل إلى...',
-            style: TextStyle(color: ColorManager.textWhite),
+          hint: Text(
+            Tr.deliveryTo.tr,
+            style: const TextStyle(color: ColorManager.textWhite),
           ),
           value: controller.userlocationId,
           onChanged: (val) {
@@ -42,9 +43,9 @@ AppBar appBarDefult() {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'نقاطي',
-                      style: TextStyle(
+                    Text(
+                      Tr.points.tr,
+                      style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w900,
                           color: ColorManager.textWhite),

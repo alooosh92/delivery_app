@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/user_info_controller.dart';
 import '../../../database/user_info.dart';
+import '../../../master_widget/tr.dart';
 import 'info_page_button.dart';
 import 'input_form.dart';
 
@@ -42,37 +43,37 @@ class UserInfoBody extends StatelessWidget {
                 children: [
                   InputForm(
                     controller: name,
-                    label: "الاسم الكامل",
+                    label: Tr.fullName.tr,
                     type: TextInputType.text,
                   ),
                   InputForm(
                     controller: mobile,
-                    label: "رقم المبايل",
+                    label: Tr.mobail.tr,
                     type: TextInputType.phone,
                   ),
                   DropdownButtonFormField<bool>(
                     validator: (value) {
                       if (value == null) {
-                        return "لا يمكن ترك هذا الخيار فارغ";
+                        return Tr.notEmpty.tr;
                       }
                       return null;
                     },
                     value: sex,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(20),
                           ),
                         ),
-                        label: Text("الجنس")),
-                    items: const [
+                        label: Text(Tr.sex.tr)),
+                    items: [
                       DropdownMenuItem(
                         value: true,
-                        child: Text("رجل"),
+                        child: Text(Tr.man.tr),
                       ),
                       DropdownMenuItem(
                         value: false,
-                        child: Text("امرة"),
+                        child: Text(Tr.wman.tr),
                       )
                     ],
                     onChanged: (value) {
@@ -82,18 +83,18 @@ class UserInfoBody extends StatelessWidget {
                   DropdownButtonFormField<int>(
                     validator: (value) {
                       if (value == null) {
-                        return "لا يمكن ترك هذا الخيار فارغ";
+                        return Tr.notEmpty.tr;
                       }
                       return null;
                     },
                     value: region,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),
                       ),
-                      label: Text("المحافظة"),
+                      label: Text(Tr.region.tr),
                     ),
                     items: regions,
                     onChanged: (value) {
@@ -105,7 +106,7 @@ class UserInfoBody extends StatelessWidget {
                     children: [
                       InfopageButton(
                         buttonColore: null,
-                        text: "حفظ",
+                        text: Tr.save.tr,
                         textColor: null,
                         press: () {
                           userInfoController.clickSaveButton(
@@ -121,7 +122,7 @@ class UserInfoBody extends StatelessWidget {
                       ),
                       InfopageButton(
                         buttonColore: Colors.amber,
-                        text: "إلغاء",
+                        text: Tr.cancel.tr,
                         textColor: Colors.white,
                         press: () {
                           userInfoController.clickCanselButton();

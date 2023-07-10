@@ -4,15 +4,15 @@ import 'package:delivery_app/res/screen/auth/login.dart';
 import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../controller/auth_controller.dart';
+import '../../master_widget/tr.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final formChangePasswordKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formChangePasswordKey = GlobalKey<FormState>();
     TextEditingController oldPassword = TextEditingController();
     TextEditingController newPassword = TextEditingController();
     TextEditingController confirmPassword = TextEditingController();
@@ -32,11 +32,11 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                   AuthTextFormField(
                       controller: oldPassword,
-                      label: "كلمة السر القديمة",
+                      label: Tr.oldPassword.tr,
                       type: TextInputType.emailAddress,
                       valida: (value) {
                         if (value == null || value.isEmpty) {
-                          return "لا يمكن ترك هذه القيمة فارغة";
+                          return Tr.plaseInsertPassword.tr;
                         }
                         return null;
                       },
@@ -44,14 +44,14 @@ class ChangePasswordScreen extends StatelessWidget {
                       icon: Icons.password),
                   AuthTextFormField(
                       controller: newPassword,
-                      label: "كلمة السر الجديدة",
+                      label: Tr.newPassword.tr,
                       type: TextInputType.emailAddress,
                       valida: (value) {
                         if (value == null || value.isEmpty) {
-                          return "لا يمكن ترك هذه القيمة فارغة";
+                          return Tr.plaseInsertPassword.tr;
                         } else {
                           if (value.length < 6) {
-                            return "كلمة السر قصيرة";
+                            return Tr.palseInsert6LaterAtLess.tr;
                           }
                         }
                         return null;
@@ -60,14 +60,14 @@ class ChangePasswordScreen extends StatelessWidget {
                       icon: Icons.password),
                   AuthTextFormField(
                       controller: confirmPassword,
-                      label: "تأكيد كلمة السر",
+                      label: Tr.confirmPassword.tr,
                       type: TextInputType.emailAddress,
                       valida: (value) {
                         if (value == null || value.isEmpty) {
-                          return "لا يمكن ترك هذه القيمة فارغة";
+                          return Tr.plaseInsertPassword.tr;
                         } else {
                           if (value != newPassword.text) {
-                            return "كلمة السر غير مطابقة";
+                            return Tr.passwordIsNotMatch.tr;
                           }
                         }
                         return null;
@@ -88,13 +88,13 @@ class ChangePasswordScreen extends StatelessWidget {
                                   await AuthServies.logout();
                                   Get.offAll(const LoginScreen());
                                 },
-                                okText: "موافق",
-                                title: "ملاحظات",
-                                masseg: "تم تعديل كلمة المرور بنجاح");
+                                okText: Tr.ok.tr,
+                                title: Tr.notes.tr,
+                                masseg: Tr.editPasswordSccuss.tr);
                           }
                         }
                       },
-                      child: const Text("اعادة تعيين كلمة السر")),
+                      child: Text(Tr.changePassword.tr)),
                   SizedBox(
                     height: MediaQuery.sizeOf(context).height * .15,
                   ),

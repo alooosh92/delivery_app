@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../database/item_info.dart';
 import '../../../master_widget/elev_widget.dart';
+import '../../../master_widget/tr.dart';
 import 'bay_button.dart';
 
 class ItemBody extends StatelessWidget {
@@ -72,9 +74,9 @@ class ItemBody extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "التقيم",
-                                style: TextStyle(
+                              Text(
+                                Tr.evaluation.tr,
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w400),
                               ),
                               ElevWidget(

@@ -1,5 +1,6 @@
 import 'package:delivery_app/res/controller/auth_controller.dart';
 import 'package:delivery_app/res/controller/home_controller.dart';
+import 'package:delivery_app/res/master_widget/tr.dart';
 import 'package:delivery_app/res/screen/home/widget/elevate_button_accont.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,21 +23,22 @@ class AccontScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevateButtonAccont(
-                      text: 'تعديل ملفك الشخصي',
+                      text: Tr.editProfile.tr,
                       press: homeController.clickBtnUserInfoScreen),
                   ElevateButtonAccont(
-                      text: 'عناويني',
+                      text: Tr.myLocation.tr,
                       press: homeController.clickBtnUserLocationScreen),
                   ElevateButtonAccont(
-                      text: "تعديل كلمة المرور",
+                      text: Tr.changePassword.tr,
                       press: homeController.clickBtnChangepassword),
                   ElevateButtonAccont(
-                      text: 'الإعدادات', press: homeController.clickBtnSetting),
+                      text: Tr.settings.tr,
+                      press: homeController.clickBtnSetting),
                   ElevateButtonAccont(
-                      text: 'تواصل معنا',
+                      text: Tr.conectUs.tr,
                       press: homeController.clickBtnConuctUs),
                   ElevateButtonAccont(
-                      text: 'تسجيل خروج',
+                      text: Tr.logout.tr,
                       press: () async {
                         AuthController.logout();
                         Get.back();

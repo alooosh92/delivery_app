@@ -4,6 +4,7 @@ import 'package:delivery_app/res/screen/auth/widget/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/auth_controller.dart';
+import '../../master_widget/tr.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -17,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
     TextEditingController mobile = TextEditingController();
     bool? sex;
     int? region;
-    final formRegisterKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formRegisterKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -34,14 +35,14 @@ class RegisterScreen extends StatelessWidget {
                     controller: username,
                     hide: false,
                     icon: Icons.email,
-                    label: "البريد الالكتروني",
+                    label: Tr.emailAdrees.tr,
                     type: TextInputType.emailAddress,
                     valida: (value) {
                       if (value == null || value.isEmpty) {
-                        return "لا يمكن ترك هذه القيمة فارغة";
+                        return Tr.plaseInsertEmailAdress.tr;
                       } else {
                         if (!value.contains("@") || !value.contains(".")) {
-                          return "الرجاء ادخال ايميل صحيح";
+                          return Tr.currectEmail.tr;
                         }
                       }
                       return null;
@@ -51,14 +52,14 @@ class RegisterScreen extends StatelessWidget {
                     controller: password,
                     hide: true,
                     icon: Icons.password,
-                    label: "كلمة السر",
+                    label: Tr.password.tr,
                     type: TextInputType.visiblePassword,
                     valida: (value) {
                       if (value == null || value.isEmpty) {
-                        return "لا يمكن ترك هذه القيمة فارغة";
+                        return Tr.plaseInsertPassword.tr;
                       } else {
                         if (value.length < 6) {
-                          return "كلمة المرور أقصر من اللازم";
+                          return Tr.palseInsert6LaterAtLess.tr;
                         }
                       }
                       return null;
@@ -68,14 +69,14 @@ class RegisterScreen extends StatelessWidget {
                     controller: passwordConform,
                     hide: true,
                     icon: Icons.password,
-                    label: "تأكيد كلمة السر",
+                    label: Tr.confirmPassword.tr,
                     type: TextInputType.visiblePassword,
                     valida: (value) {
                       if (value == null || value.isEmpty) {
-                        return "لا يمكن ترك هذه القيمة فارغة";
+                        return Tr.plaseInsertPassword.tr;
                       } else {
                         if (value != password.text) {
-                          return "كلمة المرور غير مطابقة ";
+                          return Tr.passwordIsNotMatch.tr;
                         }
                       }
                       return null;
@@ -85,11 +86,11 @@ class RegisterScreen extends StatelessWidget {
                     controller: name,
                     hide: false,
                     icon: Icons.abc,
-                    label: "الاسم الثلاثي",
+                    label: Tr.fullName.tr,
                     type: TextInputType.visiblePassword,
                     valida: (value) {
                       if (value == null || value.isEmpty) {
-                        return "لا يمكن ترك هذه القيمة فارغة";
+                        return Tr.notEmpty.tr;
                       }
                       return null;
                     },
@@ -98,14 +99,14 @@ class RegisterScreen extends StatelessWidget {
                     controller: mobile,
                     hide: false,
                     icon: Icons.phone_android,
-                    label: "رقم المبايل",
+                    label: Tr.mobail.tr,
                     type: TextInputType.visiblePassword,
                     valida: (value) {
                       if (value == null || value.isEmpty) {
-                        return "لا يمكن ترك هذه القيمة فارغة";
+                        return Tr.notEmpty.tr;
                       } else {
                         if (value.length < 10) {
-                          return "رقم الجوال أقصر من اللازم";
+                          return Tr.shortMobail.tr;
                         }
                       }
                       return null;
@@ -114,26 +115,26 @@ class RegisterScreen extends StatelessWidget {
                   DropdownButtonFormField<bool>(
                     validator: (value) {
                       if (value == null) {
-                        return "لا يمكن ترك هذا الخيار فارغ";
+                        return Tr.notEmpty.tr;
                       }
                       return null;
                     },
                     value: sex,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(20),
                           ),
                         ),
-                        label: Text("الجنس")),
-                    items: const [
+                        label: Text(Tr.sex.tr)),
+                    items: [
                       DropdownMenuItem(
                         value: true,
-                        child: Text("رجل"),
+                        child: Text(Tr.man.tr),
                       ),
                       DropdownMenuItem(
                         value: false,
-                        child: Text("امرة"),
+                        child: Text(Tr.wman.tr),
                       )
                     ],
                     onChanged: (value) {
@@ -156,18 +157,18 @@ class RegisterScreen extends StatelessWidget {
                       return DropdownButtonFormField<int>(
                         validator: (value) {
                           if (value == null) {
-                            return "لا يمكن ترك هذا الخيار فارغ";
+                            return Tr.notEmpty.tr;
                           }
                           return null;
                         },
                         value: region,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(20),
                             ),
                           ),
-                          label: Text("المحافظة"),
+                          label: Text(Tr.region.tr),
                         ),
                         items: lRegion,
                         onChanged: (value) {
@@ -193,24 +194,21 @@ class RegisterScreen extends StatelessWidget {
                             // ignore: use_build_context_synchronously
                             if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Center(
-                                    child: Text(
-                                        "البريد الالكتروني مستخدم مسبقاً")),
+                              SnackBar(
+                                content: Center(child: Text(Tr.emailIsUsed.tr)),
                               ),
                             );
                           }
                         }
                       },
-                      child: const Text("إنشاء حساب جديد")),
+                      child: Text(Tr.register.tr)),
                   TextButton(
                       onPressed: () {
                         Get.offAll(const LoginScreen());
                       },
-                      child:
-                          const Text("هل تملك حساب بالفعل؟ سجل الدخول من هنا")),
-                  const Center(
-                    child: Text("جميع الحقوق محفوطة لشركة تيكنو"),
+                      child: Text(Tr.youHaveAccont.tr)),
+                  Center(
+                    child: Text(Tr.allRieghtReserved.tr),
                   )
                 ],
               ),
