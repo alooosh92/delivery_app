@@ -80,10 +80,15 @@ class UserOrderWidget extends StatelessWidget {
                               actions: [
                                 ElevatedButton(
                                     onPressed: () async {
+                                      Get.dialog(const Center(
+                                        child: CircularProgressIndicator(),
+                                      ));
                                       await UserOrder.deleteOrder(id);
+                                      homeController.update();
+                                      Get.back();
                                       Get.back();
                                     },
-                                    child: Text(Tr.confirming.tr)),
+                                    child: Text(Tr.ok.tr)),
                                 ElevatedButton(
                                     onPressed: () {
                                       Get.back();

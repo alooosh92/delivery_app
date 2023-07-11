@@ -37,17 +37,6 @@ class HomeController extends GetxController {
   PageController pageController =
       PageController(initialPage: 0, viewportFraction: 1);
 
-  // @override
-  // void onInit() async {
-  //   getLocation();
-  //   getUserInfo();
-  //   getQoteToday();
-  //   getItem();
-  //   getshop();
-  //   getUserInfo();
-  //   super.onInit();
-  // }
-
   void getLocation() async {
     locationsList.clear();
     var list = await UserLocation.getUserLocation();
@@ -225,10 +214,6 @@ class HomeController extends GetxController {
     Get.back();
   }
 
-  void clickBtnAddRequstInMap() {
-    Get.to(MapScreen(text: Tr.placeToReceive.tr, press: () {}));
-  }
-
   void pageIndex(double index) {
     pageController.animateToPage(index.toInt(),
         duration: const Duration(milliseconds: 2000), curve: Curves.easeInOut);
@@ -313,7 +298,7 @@ class HomeController extends GetxController {
       to.latitude,
       to.longitude,
     );
-    var price = ((p / 1000).ceil()) * 1500;
+    var price = ((p / 1000).ceil()) * 2000;
     return price > 100000 ? Tr.selectLocation.tr : price.toString();
   }
 

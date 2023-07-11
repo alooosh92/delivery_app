@@ -118,7 +118,9 @@ class TranslationManager extends Translations {
           "bay": "Bay",
           "evaluation": "Evaluation",
           "save": "Save",
-          "lang": "عربي"
+          "lang": "عربي",
+          "notesOrder":
+              "Please enter an accurate description of the order, address, weight and mobile number",
         },
         //
         // Arabic
@@ -234,7 +236,9 @@ class TranslationManager extends Translations {
           "bay": "شراء",
           "evaluation": "التقييم",
           "save": "حفظ",
-          "lang": "English"
+          "lang": "English",
+          "notesOrder":
+              "الرجاء ادخال وصف دقيق للطلبية,العنوان,الوزن ورقم الجوال"
         },
       };
 }

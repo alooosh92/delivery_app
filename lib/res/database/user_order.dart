@@ -30,7 +30,7 @@ class UserOrder {
     }
     return UserOrder(
         id: json["id"],
-        shopname: json["shopName"],
+        shopname: json["shopName"] ?? "",
         listOrder: list,
         delivery: json["delivery"],
         createTime: DateTime.parse(json["createDate"].toString()),

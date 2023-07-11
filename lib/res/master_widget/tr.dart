@@ -37,6 +37,7 @@ class Tr {
   static String wrongEmailAngPassword = "wrongEmailAngPassword";
   static String ok = "ok";
   static String notes = "notes";
+  static String notesOrder = "notesOrder";
   static String successfullyConfirmTheOrder = "successfullyConfirmTheOrder";
   static String warning = "warning";
   static String somethingWentWrongPleaseContactUs =
