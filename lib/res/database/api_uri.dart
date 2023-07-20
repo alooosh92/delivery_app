@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 var storage = GetStorage();
 
 class Api {
-  static String hosting = "http://10.0.2.2:5000/";
+  static String hosting = "http://deliveryorder-001-site1.dtempurl.com/";
   //"http://deliveryorder-001-site1.dtempurl.com/";
   //"http://10.0.2.2:5000/";
   static String master = "${hosting}api/";
@@ -31,6 +31,7 @@ class Api {
   static Uri login = Uri.parse("${master}Authentication/Login");
   static Uri register = Uri.parse("${master}Authentication/Register");
   static Uri revokeToken = Uri.parse("${master}Authentication/RevokeToken");
+  static Uri sendMessage = Uri.parse("${master}App/SendMessage");
   static Uri changePassword =
       Uri.parse("${master}Authentication/ChangePassword");
   static Uri forgetPassword =

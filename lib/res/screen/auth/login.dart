@@ -90,6 +90,7 @@ class LoginScreen extends StatelessWidget {
                           Get.dialog(const Center(
                             child: CircularProgressIndicator(),
                           ));
+
                           var b = await AuthController.login(
                               username.text, password.text);
                           if (!b) {

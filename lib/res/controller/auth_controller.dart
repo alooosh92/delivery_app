@@ -1,6 +1,7 @@
 import 'package:delivery_app/res/controller/home_controller.dart';
 import 'package:delivery_app/res/database/user_info.dart';
 import 'package:delivery_app/res/screen/auth/login.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -26,8 +27,10 @@ class AuthController extends GetxController {
   }
 
   static Future<bool> login(String usernameS, String passwordS) async {
-    var b =
-        await AuthServies.login(Auth(username: usernameS, password: passwordS));
+    var fb = FirebaseMessaging.instance;
+    var tok = await fb.getToken();
+    var b = await AuthServies.login(
+        Auth(username: usernameS, password: passwordS, token: tok));
     if (b) {
       HomeController homeController = Get.find();
       homeController.getLocation();
@@ -44,8 +47,10 @@ class AuthController extends GetxController {
 
   static Future<bool> register(String email, String password, String name,
       String mobile, bool? sex, int? region) async {
-    var r =
-        await AuthServies.register(Auth(username: email, password: password));
+    var fb = FirebaseMessaging.instance;
+    var tok = await fb.getToken();
+    var r = await AuthServies.register(
+        Auth(username: email, password: password, token: tok));
     if (r) {
       var i = await Userinfo.updateUserInfo(Userinfo(
           id: "id",

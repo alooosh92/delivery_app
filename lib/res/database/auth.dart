@@ -6,10 +6,12 @@ import 'package:get_storage/get_storage.dart';
 class Auth {
   late String username;
   late String password;
+  late String? token;
 
-  Auth({required this.username, required this.password});
+  Auth({required this.username, required this.password, required this.token});
 
-  Map<String, dynamic> toJson() => {"username": username, "password": password};
+  Map<String, dynamic> toJson() =>
+      {"username": username, "password": password, "tokenFirebase": token};
 }
 
 class AuthServies {
