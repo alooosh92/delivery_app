@@ -80,7 +80,7 @@ class BayButton extends StatelessWidget {
                   Get.back();
                   if (b) {
                     return showDialogDef(
-                        masseg: Tr.successfullyConfirmTheOrder.tr,
+                        masseg: Tr.addOrderSuccessfully.tr,
                         title: Tr.notes.tr,
                         okText: Tr.ok.tr,
                         ok: () {

@@ -12,15 +12,13 @@ class SettingSecreen extends StatelessWidget {
       body: Center(
         child: TextButton(
             onPressed: () {
-              LocalizationsManager.locale == const Locale("ar")
-                  ? {
-                      LocalizationsManager.setLangValue("en"),
-                      Get.updateLocale(const Locale("en"))
-                    }
-                  : {
-                      LocalizationsManager.setLangValue("ar"),
-                      Get.updateLocale(const Locale("ar"))
-                    };
+              if (LocalizationsManager.locale == const Locale("ar")) {
+                LocalizationsManager.setLangValue("en");
+                Get.updateLocale(const Locale("en"));
+              } else {
+                LocalizationsManager.setLangValue("ar");
+                Get.updateLocale(const Locale("ar"));
+              }
             },
             child: Center(child: Text(Tr.lang.tr))),
       ),

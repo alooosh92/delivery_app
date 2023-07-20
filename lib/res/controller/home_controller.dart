@@ -340,7 +340,9 @@ class HomeController extends GetxController {
         element.locationLong,
         element.description,
       );
-      list.add(ddm);
+      if (list.any((e) => e.value != element.id)) {
+        list.add(ddm);
+      }
     }
     return list;
   }

@@ -27,6 +27,13 @@ class LocalizationsManager {
 
   static void setLangValue(String lang) async {
     var shared = GetStorage();
+    if (lang == 'ar') {
+      locale = const Locale('ar');
+      fallbackLocale = const Locale('en');
+    } else {
+      locale = const Locale('en');
+      fallbackLocale = const Locale('ar');
+    }
     shared.write('lang', lang);
   }
 
