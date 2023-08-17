@@ -1,16 +1,3 @@
 # delivery_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## تطبيق توصيل طلبات
+![Screenshot_1692214291](https://github.com/alooosh92/delivery_app/assets/72915761/4cb6d22b-d57f-4b1b-b390-d478d14bdca5)
